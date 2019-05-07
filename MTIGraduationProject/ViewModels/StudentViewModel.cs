@@ -34,9 +34,9 @@ namespace MTIGraduationProject.ViewModels
         {
             get
             {
-                Expression<Func<HomeController, ActionResult>> edit =
+                Expression<Func<StudentController, ActionResult>> edit =
                     (c => c.EditStudent(this));
-                Expression<Func<HomeController, ActionResult>> create =
+                Expression<Func<StudentController, ActionResult>> create =
                     (c => c.RegisterStudent(this));
 
                 var action = (Id != 0) ? edit : create;

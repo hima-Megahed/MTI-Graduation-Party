@@ -1,0 +1,68 @@
+﻿@model MTIGraduationProject.ViewModels.StudentViewModel
+@{
+    ViewBag.Title = "تسجيل طالب";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> تسجيل طالب جديد </h2>
+
+@using (Html.BeginForm(Model.Action, "Student", FormMethod.Post))
+{
+    <div class="alert alert-success alert-dismissible" style="display: @(ViewBag.RegisteredSuccessfully? "block" : "none")">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>نجاح!</strong> تم تسجيل الطالب بنجاح.
+    </div>
+
+    <p class="alert alert-info"> كل الحقول  <strong>مطلوبة</strong></p>
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.Label("رقم الطالب")
+        @Html.TextBoxFor(m => m.Id, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.Id)
+    </div>
+    <div class="form-group">
+        @Html.Label("الإسم")
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.Label("التخصص")
+        @Html.TextBoxFor(m => m.Specialization)
+        @Html.ValidationMessageFor(m => m.Specialization)
+    </div>
+    <div class="form-group">
+        @Html.Label("رقم الطاولة")
+        @Html.TextBoxFor(m => m.TableId, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.TableId)
+    </div>
+    <div class="form-group">
+        @Html.Label("رقم الأتوبيس")
+        @Html.TextBoxFor(m => m.BusId, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.BusId)
+    </div>
+    <div class="form-group">
+        @Html.Label("منفذ بيع الوجبة الأول")
+        @Html.TextBoxFor(m => m.FoodOutlet1, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.FoodOutlet1)
+    </div>
+    <div class="form-group">
+        @Html.Label("منفذ بيع الوجبة الثاني")
+        @Html.TextBoxFor(m => m.FoodOutlet2, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.FoodOutlet2)
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">تسجيل</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        setTimeout(function() {
+            $(".alert-success").hide();
+        }, 3000);
+
+        $("#Id").val('');
+    </script>
+}

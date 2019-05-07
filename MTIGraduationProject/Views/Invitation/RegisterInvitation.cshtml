@@ -1,0 +1,102 @@
+﻿@model MTIGraduationProject.ViewModels.InvitationViewModel
+@{
+    ViewBag.Title = "تسجيل دعوة";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> تسجيل دعوة جديدة </h2>
+
+@using (Html.BeginForm(Model.Action, "Invitation", FormMethod.Post))
+{
+    <div class="alert alert-success alert-dismissible" style="display: @(ViewBag.RegisteredSuccessfully? "block" : "none")">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>نجاح!</strong> تم تسجيل الدعوة بنجاح.
+    </div>
+
+    <p class="alert alert-info"> كل الحقول  <strong>مطلوبة</strong></p>
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(i => i.Id)
+    <div class="form-group">
+        @Html.Label("رقم الطالب")
+        @Html.TextBoxFor(i => i.StudentId, new { type = "number" })
+        @Html.ValidationMessageFor(i => i.StudentId)
+        @Html.TextBox("StudentName", null, new { disabled = "disabled", style = "border: 0px; background: transparent;" })
+    </div>
+    <div class="form-group">
+        @Html.Label("الإسم")
+        @Html.TextBoxFor(i => i.Name, new { type = "text" })
+        @Html.ValidationMessageFor(i => i.Name)
+    </div>
+    <div class="form-group">
+        @Html.Label("الرقم القومي")
+        @Html.TextBoxFor(i => i.NationalId, new { type = "number" })
+        @Html.ValidationMessageFor(i => i.NationalId)
+    </div>
+    <div class="form-group">
+        @Html.Label("تاريخ الميلاد")
+        @Html.TextBoxFor(i => i.BirthDate, new { type = "date" })
+        @Html.ValidationMessageFor(i => i.BirthDate)
+    </div>
+    <div class="form-group">
+        @Html.Label("درجة القرابة")
+        @Html.TextBoxFor(i => i.Relationship, new { type = "text" })
+        @Html.ValidationMessageFor(i => i.Relationship)
+    </div>
+    <div class="form-group">
+        @Html.Label("محل الميلاد")
+        @Html.TextBoxFor(i => i.PlaceOfBirth, new { type = "text" })
+        @Html.ValidationMessageFor(i => i.PlaceOfBirth)
+    </div>
+    <div class="form-group">
+        @Html.Label("العنوان")
+        @Html.TextBoxFor(i => i.Address, new { type = "text" })
+        @Html.ValidationMessageFor(i => i.Address)
+    </div>
+
+
+    <button type="submit" class="btn btn-primary btn-lg">تسجيل</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        // hiding success message automatically
+        setTimeout(function() {
+                $(".alert-success").hide();
+            },
+            3000);
+
+        // showing Student Name when typing valid student Id
+        $("#StudentId").on("keyup", function(){
+            if ($("#StudentId").val().length === 5) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetStudentName", "Student")',
+                    data: JSON.stringify({studentId: $("#StudentId").val()}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(studentName) {
+                        if (studentName != null) {
+                            $("#StudentName").val(studentName);
+                        } else {
+                            $("#StudentName").val('هذاالرقم غير صحيح او غير مسجل');
+                        }
+                    },
+                    failure: function(response) {
+                        $("#StudentName").val('هذاالرقم غير صحيح او غير مسجل');
+                    },
+                    error: function(response) {
+                        $("#StudentName").val('هذاالرقم غير صحيح او غير مسجل');
+                    }
+                });
+            }
+            else {
+                $("#StudentName").val('');
+            }
+        });
+
+
+    </script>
+}

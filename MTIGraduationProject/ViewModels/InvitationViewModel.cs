@@ -40,9 +40,9 @@ namespace MTIGraduationProject.ViewModels
         {
             get
             {
-                Expression<Func<HomeController, ActionResult>> edit =
+                Expression<Func<InvitationController, ActionResult>> edit =
                     (c => c.EditInvitation(this));
-                Expression<Func<HomeController, ActionResult>> create =
+                Expression<Func<InvitationController, ActionResult>> create =
                     (c => c.RegisterInvitation(this));
 
                 var action = (Id != 0) ? edit : create;
