@@ -141,5 +141,13 @@ namespace MTIGraduationProject.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpPost]
+        public JsonResult GetStudentName(int studentId)
+        {
+            var studentName = _mtiGraduationPartyEntities.Students.First(s => s.Id == studentId)?.Name;
+
+            return Json(studentName, JsonRequestBehavior.AllowGet);
+        }
     }
 }
