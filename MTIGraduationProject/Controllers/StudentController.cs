@@ -69,7 +69,7 @@ namespace MTIGraduationProject.Controllers
         [HttpPost]
         public JsonResult GetStudentName(int studentId)
         {
-            var studentName = _mtiGraduationPartyEntities.Students.First(s => s.Id == studentId)?.Name;
+            var studentName = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId)?.Name;
 
             return Json(studentName, JsonRequestBehavior.AllowGet);
         }

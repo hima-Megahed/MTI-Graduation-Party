@@ -10,7 +10,7 @@ namespace MTIGraduationProject
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/bootstrap.min.js"));
+                        "~/Scripts/bootstrap-rtl.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -21,8 +21,9 @@ namespace MTIGraduationProject
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/site.css",
-                "~/Content/bootstrap.min.css"));
+                "~/Content/bootstrap-rtl.min.css",
+                "~/Content/bootstrap-theme-rtl.min.css",
+                "~/Content/site.css"));
         }
     }
 }

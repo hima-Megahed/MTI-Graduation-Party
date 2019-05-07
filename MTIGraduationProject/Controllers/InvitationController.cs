@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MTIGraduationProject.DTOs;
 using MTIGraduationProject.Models;
 using MTIGraduationProject.ViewModels;
 
@@ -69,6 +70,28 @@ namespace MTIGraduationProject.Controllers
         }
 
         public ActionResult EditInvitation(InvitationViewModel invitationViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public ActionResult GetInvitationList(int studentId)
+        {
+            var studentName = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId)?.Name;
+            var invitationList = _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId).ToList();
+
+            var invitationDto = new InvitationDto
+            {
+                Invitations = invitationList,
+                StudentName = studentName,
+                ValidStudentId = (studentName!=null),
+                InvitationsExist = (invitationList.Count != 0)
+            };
+
+            return PartialView("InvitationList", invitationDto);
+        }
+
+        public ActionResult DeleteInvitation(int id)
         {
             throw new NotImplementedException();
         }

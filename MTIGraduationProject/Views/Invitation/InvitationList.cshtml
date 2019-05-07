@@ -1,0 +1,69 @@
+﻿@model MTIGraduationProject.DTOs.InvitationDto
+
+@if (Model.ValidStudentId && Model.InvitationsExist)
+{
+    <h1>@Model.StudentName</h1>
+    <p>
+        @Html.ActionLink("إضافة دعوة جديدة", "RegisterInvitation")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("اسم المدعو")
+            </th>
+            <th>
+                @Html.Label("درجة القرابة")
+            </th>
+            <th>
+                @Html.Label("الرقم القومي")
+            </th>
+            <th>
+                @Html.Label("تاريخ الميلاد")
+            </th>
+            <th>
+                @Html.Label("محل الميلاد")
+            </th>
+            <th>
+                @Html.Label("العنوان")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Invitations)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Relationship)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NationalId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.ActionLink("تعديل", "EditInvitation", new { id = item.Id }) |
+                    @Html.ActionLink("مسح", "DeleteInvitation", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else if (!Model.ValidStudentId)
+{
+    <h1>هذاالرقم غير صحيح او غير مسجل</h1>
+}
+else if (!Model.InvitationsExist)
+{
+    <h1>لا توجد دعاوي مسجلة لهذ الطالب</h1>
+}

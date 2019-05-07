@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "طباعة الدعاوي";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>طباعة الدعاوي</h2>
+
+@Html.Label("رقم الطالب")
+
+<input type="number" value="" id="StudentId" autofocus/>
+
+
+<div class="container" id="invitationList"></div>
+
+
+
+@section scripts
+{
+    <script>
+
+        var url = '@Url.Action("GetInvitationList", "Invitation")';
+
+        // loading Partial View with Invitations
+        $("#StudentId").on("keyup", function() {
+            if ($("#StudentId").val().length === 5) {
+                $('#invitationList').load(url, { studentId: $("#StudentId").val() });
+            }
+            else {
+                $("#invitationList").empty();
+            }
+        });
+
+    </script>
+}
