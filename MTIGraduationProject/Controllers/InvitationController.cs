@@ -88,7 +88,7 @@ namespace MTIGraduationProject.Controllers
                 InvitationsExist = (invitationList.Count != 0)
             };
 
-            return PartialView("InvitationList", invitationDto);
+            return PartialView("Partial Views/_InvitationList", invitationDto);
         }
 
         public ActionResult DeleteInvitation(int id)

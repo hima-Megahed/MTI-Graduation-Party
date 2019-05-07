@@ -220,7 +220,7 @@
     <Content Include="Views\Student\RegisterStudent.cshtml" />
     <Content Include="Views\Invitation\RegisterInvitation.cshtml" />
     <Content Include="Views\Printing\Index.cshtml" />
-    <Content Include="Views\Invitation\InvitationList.cshtml" />
+    <Content Include="Views\Shared\Partial Views\_InvitationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
