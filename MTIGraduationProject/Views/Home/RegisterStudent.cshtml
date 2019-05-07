@@ -7,6 +7,11 @@
 
 @using (Html.BeginForm(Model.Action, "Home", FormMethod.Post))
 {
+    <div class="alert alert-success alert-dismissible" style="display: @(ViewBag.RegisteredSuccessfully? "block" : "none")">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>نجاح!</strong> تم تسجيل الطالب بنجاح.
+    </div>
+
     <p class="alert alert-info"> كل الحقول  <strong>مطلوبة</strong></p>
 
     @Html.AntiForgeryToken()
@@ -28,7 +33,7 @@
     </div>
     <div class="form-group">
         @Html.Label("رقم الطاولة")
-        @Html.TextBoxFor(m => m.TableId, new {type = "number" })
+        @Html.TextBoxFor(m => m.TableId, new { type = "number" })
         @Html.ValidationMessageFor(m => m.TableId)
     </div>
     <div class="form-group">
@@ -37,14 +42,14 @@
         @Html.ValidationMessageFor(m => m.BusId)
     </div>
     <div class="form-group">
-        @Html.Label("رقم الكرسي الأول")
-        @Html.TextBoxFor(m => m.Chair1Id, new { type = "number" })
-        @Html.ValidationMessageFor(m => m.Chair1Id)
+        @Html.Label("منفذ بيع الوجبة الأول")
+        @Html.TextBoxFor(m => m.FoodOutlet1, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.FoodOutlet1)
     </div>
     <div class="form-group">
-        @Html.Label("رقم الكرسي الثاني")
-        @Html.TextBoxFor(m => m.Chair2Id, new { type = "number" })
-        @Html.ValidationMessageFor(m => m.Chair2Id)
+        @Html.Label("منفذ بيع الوجبة الثاني")
+        @Html.TextBoxFor(m => m.FoodOutlet2, new { type = "number" })
+        @Html.ValidationMessageFor(m => m.FoodOutlet2)
     </div>
 
     <button type="submit" class="btn btn-primary btn-lg">تسجيل</button>
@@ -52,4 +57,12 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        setTimeout(function() {
+            $(".alert-success").hide();
+        }, 3000);
+
+        $("#Id").val('');
+    </script>
 }

@@ -4,8 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e25e4a26d5be4aff9dca47db8a125be0" Name="Diagram1">
-        <EntityTypeShape EntityType="MTI_GraduationPartyModel.Student" Width="1.5" PointX="0.75" PointY="0.75" />
+      <Diagram DiagramId="8c1bd176517945769efe92fae73080d0" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Invitation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Invitation_Student" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,43 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using MTIGraduationProject.Controllers;
+using MTIGraduationProject.ViewModelsValidations;
 
 namespace MTIGraduationProject.ViewModels
 {
-    public class StudentViewModel
+    public class InvitationViewModel
     {
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        [Range(0, 99999, ErrorMessage = "رقم الطالب غير صحيح")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage="هذا الحقل مطلوب")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [ValidStudentId(ErrorMessage ="هذا الطالب غير موجود")]
+        public int? StudentId { get; set; }
+
+        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public string Specialization { get; set; }
+        public string Relationship { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? TableId { get; set; }
+        public string NationalId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? BusId { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? FoodOutlet1 { get; set; }
+        public string PlaceOfBirth { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? FoodOutlet2 { get; set; }
+        public string Address { get; set; }
 
         public string Action
         {
             get
             {
                 Expression<Func<HomeController, ActionResult>> edit =
-                    (c => c.EditStudent(this));
+                    (c => c.EditInvitation(this));
                 Expression<Func<HomeController, ActionResult>> create =
-                    (c => c.RegisterStudent(this));
+                    (c => c.RegisterInvitation(this));
 
                 var action = (Id != 0) ? edit : create;
 
