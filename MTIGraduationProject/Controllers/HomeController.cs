@@ -127,7 +127,7 @@ namespace MTIGraduationProject.Controllers
 
             TempData["RegisteredSuccessfully"] = true;
 
-            return RedirectToAction("RegisterStudent", "Home");
+            return RedirectToAction("RegisterInvitation", "Home");
         }
 
         [ValidateAntiForgeryToken]

@@ -1,9 +1,9 @@
 ﻿@model MTIGraduationProject.ViewModels.InvitationViewModel
 @{
-    ViewBag.Title = "RegisterStudent";
+    ViewBag.Title = "تسجيل دعوة";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2> تسجيل طالب جديد </h2>
+<h2> تسجيل دعوة جديدة </h2>
 
 @using (Html.BeginForm(Model.Action, "Home", FormMethod.Post))
 {
@@ -64,6 +64,5 @@
             $(".alert-success").hide();
         }, 3000);
 
-        $("#Id").val('');
     </script>
 }
