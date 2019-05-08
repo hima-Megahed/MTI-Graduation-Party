@@ -1,13 +1,22 @@
-﻿@model MTIGraduationProject.DTOs.InvitationDto
-
+﻿@using System.Globalization
+@using MTIGraduationProject.Helpers
+@model MTIGraduationProject.DTOs.InvitationDto
+@{
+    var i = 1;
+}
 @if (Model.ValidStudentId && Model.InvitationsExist)
 {
     <h1>@Model.StudentName</h1>
+    
     <p>
-        @Html.ActionLink("إضافة دعوة جديدة", "RegisterInvitation")
+        <a href="@Url.Action("RegisterInvitation", "Invitation")">إضافة دعوة جديدة</a>
     </p>
-    <table class="table">
+
+    <table class="table table-striped">
         <tr>
+            <th>
+                @Html.Label("#")
+            </th>
             <th>
                 @Html.Label("اسم المدعو")
             </th>
@@ -31,33 +40,40 @@
 
         @foreach (var item in Model.Invitations)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Relationship)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NationalId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.ActionLink("تعديل", "EditInvitation", new { id = item.Id }) |
-                    @Html.ActionLink("مسح", "DeleteInvitation", new { id = item.Id })
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @(i++.ToString().ConvertNumeralsToArabic())
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Relationship)
+        </td>
+        <td>
+            @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
+            @Html.DisplayFor(modelItem => arabicNationalId)
+        </td>
+        <td>
+            @{ var arabicBirthDate = item.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
+            @Html.DisplayFor(modelItem => arabicBirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            <a href="@Url.Action("EditInvitation","Invitation",new {id = item.Id})">تعديل</a> |
+            <a href="@Url.Action("DeleteInvitation","Invitation", new {id = item.Id})">مسح</a>
+        </td>
+    </tr>
         }
 
     </table>
+
+    <button type="submit" class="btn btn-primary btn-lg JS-register-attendance"> تسجيل حضور</button>
 }
 else if (!Model.ValidStudentId)
 {
@@ -65,5 +81,13 @@ else if (!Model.ValidStudentId)
 }
 else if (!Model.InvitationsExist)
 {
-    <h1>لا توجد دعاوي مسجلة لهذ الطالب</h1>
+    <h1>لا توجد دعاوي مسجلة لهذا الطالب</h1>
 }
+
+
+<script>
+    $(".JS-register-attendance").on("click",
+        function() {
+            alert("Sd");
+        });
+</script>

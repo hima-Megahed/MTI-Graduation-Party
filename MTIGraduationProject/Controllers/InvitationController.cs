@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using MTIGraduationProject.DTOs;
@@ -75,7 +76,7 @@ namespace MTIGraduationProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetInvitationList(int studentId)
+        public ActionResult GetInvitationList(int studentId = 0)
         {
             var studentName = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId)?.Name;
             var invitationList = _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId).ToList();
