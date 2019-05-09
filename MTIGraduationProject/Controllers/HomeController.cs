@@ -22,5 +22,10 @@ namespace MTIGraduationProject.Controllers
 
             return View();
         }
+
+        public ActionResult RegisterAttendance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
