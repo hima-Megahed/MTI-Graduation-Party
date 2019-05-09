@@ -3,14 +3,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2 id="InvitationHeading">استعلام عن الدعوة</h2>
 
-@Html.Label("رقم الطالب")
+<form class="form-inline font-sz-lg" id="FormSearchStudent">
+    @Html.Label("رقم الطالب", new{@for = "SearchStudentID"})
 
-<input type="number" value="" id="StudentId" autofocus/>
+    <input type="number" value="" id="SearchStudentId" autofocus class="form-control" />
+    
+    <div class="sk-folding-cube hidden" id="loader">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
+</form>
 
 
-<div class="container" id="invitationList"></div>
+<div class="container hidden" id="invitationList"></div>
 
 @section scripts
 {
@@ -18,9 +28,18 @@
         var url = '@Url.Action("GetInvitationList", "Invitation")';
 
         // loading Partial View with Invitations
-        $("#StudentId").on("keyup", function() {
-            if ($("#StudentId").val().length === 5) {
-                $('#invitationList').load(url, { studentId: $("#StudentId").val() });
+        $("#SearchStudentId").on("keyup", function() {
+            if ($("#SearchStudentId").val().length === 5) {
+
+                $("#loader").removeClass("hidden");
+                $('#invitationList').load(url, { studentId: $("#SearchStudentId").val() },
+                    function () {
+                        setTimeout(function() {
+                            $("#loader").addClass("hidden");
+                            $("#invitationList").removeClass("hidden");
+                        }, 2000);
+                        
+                    });
             }
             else {
                 $("#invitationList").empty();

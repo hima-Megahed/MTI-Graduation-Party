@@ -84,10 +84,8 @@ namespace MTIGraduationProject.Controllers
             var invitationDto = new InvitationDto
             {
                 Invitations = invitationList,
-                StudentName = student?.Name,
-                Specialization = student?.Specialization,
-                StudentId = student?.Id,
-                InvitationsExist = (invitationList.Count != 0)
+                InvitationsExist = (invitationList.Count != 0),
+                Student = student
             };
 
             return PartialView("Partial Views/_InvitationList", invitationDto);

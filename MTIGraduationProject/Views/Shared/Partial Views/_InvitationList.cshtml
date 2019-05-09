@@ -5,168 +5,182 @@
     var printHeader = "المعهد الفني للقوات المسلحة حفل تخرج الدفعة 48".ConvertNumeralsToArabic();
 }
 
-@if (Model.StudentId != null && Model.InvitationsExist)
+@if (Model.Student != null && Model.InvitationsExist)
 {
-    <div class="print-content">
-        @Html.BeginForm("RegisterAttendance", "Home", FormMethod.Post, new {@class = "form-inline"}){
-        <div class="form-group">
-            <label for="StudentId">الرقم العسكري /</label>
-            <a id="StudentId" href="@Url.Action("EditStudent", "Student", new {studentId = Model.StudentId})">
-                @Model.StudentId.ToString().ConvertNumeralsToArabic()
-            </a>
-        </div>
-        <div class="form-group">
-            <label for="StudentName">اسم الطالب /</label>
-            <input id="StudentName" class="form-control" type="text" readonly="readonly" value="@Model.StudentName">
-        </div>
-        <div class="form-group">
-            <label for="Specialization">التخصص /</label>
-            <input id="Specialization" class="form-control" type="text" readonly="readonly" value="@Model.Specialization">
-        </div>
-        <div class="form-group">
-            <p>
-                <a href="@Url.Action("RegisterInvitation", "Invitation")">إضافة دعوة جديدة</a>
-            </p>
-        </div>
-        <div class="form-group">
-            <table class="table table-striped">
-                <tr>
-                    <th>
-                        @Html.Label("#")
-                    </th>
-                    <th>
-                        @Html.Label("اسم المدعو")
-                    </th>
-                    <th>
-                        @Html.Label("درجة القرابة")
-                    </th>
-                    <th>
-                        @Html.Label("الرقم القومي")
-                    </th>
-                    <th>
-                        @Html.Label("تاريخ الميلاد")
-                    </th>
-                    <th>
-                        @Html.Label("محل الميلاد")
-                    </th>
-                    <th>
-                        @Html.Label("العنوان")
-                    </th>
-                    <th></th>
-                </tr>
+    <div class="print-content font-sz-lg">
+        @using (Html.BeginForm("RegisterAttendance", "Home", FormMethod.Post, new { @class = "form-inline mb-30", }))
+        {
+            <div class="form-group" id="newInvitation">
+                <p>
+                    <a href="@Url.Action("RegisterInvitation", "Invitation")">إضافة دعوة جديدة</a>
+                </p>
+            </div>
 
-                @foreach (var item in Model.Invitations)
-                {
+            <div class="form-group">
+                <label for="StudentId">الرقم العسكري /</label>
+                <a id="StudentId" href="@Url.Action("EditStudent", "Student", new { studentId = Model.Student.Id })">
+                    @Model.Student.Id.ToString().ConvertNumeralsToArabic()
+                </a>
+            </div>
+            <div class="form-group mr-30">
+                <label for="StudentName">اسم الطالب /</label>
+                <input id="StudentName" class="form-control" type="text" readonly="readonly" value="@Model.Student.Name">
+            </div>
+            <div class="form-group mr-30">
+                <label for="Specialization">التخصص /</label>
+                <input id="Specialization" class="form-control" type="text" readonly="readonly" value="@Model.Student.Specialization">
+            </div>
+            <div class="form-group" id="InvitationTable">
+                <table class="table table-striped">
                     <tr>
-                        <td>
-                            @(counter++.ToString().ConvertNumeralsToArabic())
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Relationship)
-                        </td>
-                        <td>
-                            @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
-                            @Html.DisplayFor(modelItem => arabicNationalId)
-                        </td>
-                        <td>
-                            @{ var arabicBirthDate = item.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
-                            @Html.DisplayFor(modelItem => arabicBirthDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            <a href="@Url.Action("EditInvitation", "Invitation", new {id = item.Id})">تعديل</a> |
-                            <a href="@Url.Action("DeleteInvitation", "Invitation", new {id = item.Id})">مسح</a>
-                        </td>
-                    </tr>
-                }
+                        <th>
+                            @Html.Label("#")
+                        </th>
+                        <th>
+                            @Html.Label("اسم المدعو")
+                        </th>
+                        <th>
+                            @Html.Label("درجة القرابة")
+                        </th>
+                        <th>
+                            @Html.Label("الرقم القومي")
+                        </th>
+                        <th>
+                            @Html.Label("تاريخ الميلاد")
+                        </th>
+                        <th>
+                            @Html.Label("محل الميلاد")
+                        </th>
+                        <th>
+                            @Html.Label("العنوان")
+                        </th>
 
-            </table>
-        </div>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Invitations)
+                    {
+                        <tr>
+                            <td>
+                                @(counter++.ToString().ConvertNumeralsToArabic())
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Relationship)
+                            </td>
+                            <td>
+                                @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicNationalId)
+                            </td>
+                            <td>
+                                @{ var arabicBirthDate = item.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicBirthDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditInvitation", "Invitation", new { id = item.Id })">تعديل</a> |
+                                <a href="@Url.Action("DeleteInvitation", "Invitation", new { id = item.Id })">مسح</a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
         }
 
         <button type="submit" class="btn btn-primary btn-lg" id="JS-register-attendance"> تسجيل حضور</button>
         <button type="button" class="btn btn-primary btn-lg" id="JS-printInvitation" onclick="printInv();"> طباعة الدعوة</button>
     </div>
 
-    <div id="printableArea" style="display: none;">
+    <div class="font-sz-lg" id="printableArea" style="display: none;">
+        @{ counter = 1; }
+        <h1>@printHeader</h1>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="StudentId">الرقم العسكري /</label>
+                <p id="StudentId">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
+            </div>
+            <div class="form-group pr-30">
+                <label for="StudentName">اسم الطالب /</label>
+                <input id="StudentName" value="@Model.Student.Name" class="">
+            </div>
+            <div class="form-group" id="FormTable">
+                <table class="table table-striped" id="PrintableTable">
+                    <tr>
+                        <th>
+                            @Html.Label("#")
+                        </th>
+                        <th>
+                            @Html.Label("اسم المدعو")
+                        </th>
+                        <th>
+                            @Html.Label("درجة القرابة")
+                        </th>
+                        <th>
+                            @Html.Label("الرقم القومي")
+                        </th>
+                        <th>
+                            @Html.Label("رقم الأتوبيس")
+                        </th>
+                        <th>
+                            @Html.Label("رقم الترابيزة")
+                        </th>
+                        <th></th>
+                    </tr>
 
-        <label>الرقم العسكري /</label>
-        <label>@Model.StudentId.ToString().ConvertNumeralsToArabic()</label>
+                    @foreach (var item in Model.Invitations)
+                    {
+                        <tr>
+                            <td>
+                                @(counter++.ToString().ConvertNumeralsToArabic())
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Relationship)
+                            </td>
+                            <td>
+                                @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicNationalId)
+                            </td>
+                            <td>
+                                @{ var arabicBusId = Model.Student.BusId.ToString().ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicBusId)
+                            </td>
+                            <td>
+                                @{ var arabicTableId = Model.Student.TableId.ToString().ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicTableId)
+                            </td>
+                        </tr>
+                    }
 
-        <label>اسم الطالب /</label>
-        <label>@Model.StudentName</label>
+                </table>
+            </div>
+            <div class="form-group w-7xx">
+                <label> منفذ وجبة الإفطار </label>
+                <p class="pr-30">@(Model.Student.foodOutlet1.ToString().ConvertNumeralsToArabic())</p>
+            </div>
+            <div class="form-group">
+                <label> منفذ وجبة الإفطار </label>
+                <p class="pr-30">@(Model.Student.foodOutlet2.ToString().ConvertNumeralsToArabic())</p>
+            </div>
 
-        <label>التخصص /</label>
-        <label>@Model.Specialization</label>
+        </div>
 
-        <table class="table table-striped">
-            <tr>
-                <th>
-                    @Html.Label("#")
-                </th>
-                <th>
-                    @Html.Label("اسم المدعو")
-                </th>
-                <th>
-                    @Html.Label("درجة القرابة")
-                </th>
-                <th>
-                    @Html.Label("الرقم القومي")
-                </th>
-                <th>
-                    @Html.Label("تاريخ الميلاد")
-                </th>
-                <th>
-                    @Html.Label("محل الميلاد")
-                </th>
-                <th>
-                    @Html.Label("العنوان")
-                </th>
-                <th></th>
-            </tr>
 
-            @foreach (var item in Model.Invitations)
-            {
-                <tr>
-                    <td>
-                        @(counter++.ToString().ConvertNumeralsToArabic())
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Relationship)
-                    </td>
-                    <td>
-                        @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
-                        @Html.DisplayFor(modelItem => arabicNationalId)
-                    </td>
-                    <td>
-                        @{ var arabicBirthDate = item.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
-                        @Html.DisplayFor(modelItem => arabicBirthDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                </tr>
-            }
 
-        </table>
     </div>
 
 }
-else if (Model.StudentId == null)
+else if (Model.Student == null)
 {
     <h1>هذاالرقم غير صحيح او غير مسجل</h1>
 }
