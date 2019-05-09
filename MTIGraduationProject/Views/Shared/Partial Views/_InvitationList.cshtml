@@ -1,13 +1,21 @@
-﻿@using System.Globalization
-@using MTIGraduationProject.Helpers
+﻿@using MTIGraduationProject.Helpers
 @model MTIGraduationProject.DTOs.InvitationDto
 @{
-    var i = 1;
+    var counter = 1;
+    var printHeader = "المعهد الفني للقوات المسلحة حفل تخرج الدفعة 48".ConvertNumeralsToArabic();
 }
-@if (Model.ValidStudentId && Model.InvitationsExist)
+
+@if (Model.StudentId != null && Model.InvitationsExist)
 {
-    <h1>@Model.StudentName</h1>
-    
+    <label>الرقم العسكري /</label>
+    <a href="@Url.Action("EditStudent","Student", new {studentId = Model.StudentId})">@Model.StudentId.ToString().ConvertNumeralsToArabic()</a>
+
+    <label>اسم الطالب /</label>
+    <label>@Model.StudentName</label>
+
+    <label>التخصص /</label>
+    <label>@Model.Specialization</label>
+
     <p>
         <a href="@Url.Action("RegisterInvitation", "Invitation")">إضافة دعوة جديدة</a>
     </p>
@@ -40,42 +48,43 @@
 
         @foreach (var item in Model.Invitations)
         {
-    <tr>
-        <td>
-            @(i++.ToString().ConvertNumeralsToArabic())
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Relationship)
-        </td>
-        <td>
-            @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
-            @Html.DisplayFor(modelItem => arabicNationalId)
-        </td>
-        <td>
-            @{ var arabicBirthDate = item.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
-            @Html.DisplayFor(modelItem => arabicBirthDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            <a href="@Url.Action("EditInvitation","Invitation",new {id = item.Id})">تعديل</a> |
-            <a href="@Url.Action("DeleteInvitation","Invitation", new {id = item.Id})">مسح</a>
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    @(counter++.ToString().ConvertNumeralsToArabic())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Relationship)
+                </td>
+                <td>
+                    @{ var arabicNationalId = item.NationalId.ConvertNumeralsToArabic();}
+                    @Html.DisplayFor(modelItem => arabicNationalId)
+                </td>
+                <td>
+                    @{ var arabicBirthDate = item.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
+                    @Html.DisplayFor(modelItem => arabicBirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditInvitation","Invitation",new {id = item.Id})">تعديل</a> |
+                    <a href="@Url.Action("DeleteInvitation","Invitation", new {id = item.Id})">مسح</a>
+                </td>
+            </tr>
         }
 
     </table>
 
     <button type="submit" class="btn btn-primary btn-lg JS-register-attendance"> تسجيل حضور</button>
+    <button type="submit" class="btn btn-primary btn-lg JS-printInvitation" onclick="print();"> طباعة الدعوة</button>
 }
-else if (!Model.ValidStudentId)
+else if (Model.StudentId == null)
 {
     <h1>هذاالرقم غير صحيح او غير مسجل</h1>
 }
@@ -85,9 +94,19 @@ else if (!Model.InvitationsExist)
 }
 
 
+<script src="~/Scripts/print.min.js"></script>
 <script>
-    $(".JS-register-attendance").on("click",
-        function() {
-            alert("Sd");
+
+    function print() {
+        printJS({
+            printable: 'invitationList',
+            type: 'html',
+            header: '@printHeader',
+            headerStyle: "font-weight: 700; text-align: center; color: red;",
+            maxWidth: 1400,
+            css: '~/Content/print.css'
+
         });
+    }
+    
 </script>

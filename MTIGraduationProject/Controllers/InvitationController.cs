@@ -76,16 +76,17 @@ namespace MTIGraduationProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetInvitationList(int studentId = 0)
+        public ActionResult GetInvitationList(int studentId)
         {
-            var studentName = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId)?.Name;
+            var student = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId);
             var invitationList = _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId).ToList();
 
             var invitationDto = new InvitationDto
             {
                 Invitations = invitationList,
-                StudentName = studentName,
-                ValidStudentId = (studentName!=null),
+                StudentName = student?.Name,
+                Specialization = student?.Specialization,
+                StudentId = student?.Id,
                 InvitationsExist = (invitationList.Count != 0)
             };
 

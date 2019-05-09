@@ -69,9 +69,15 @@ namespace MTIGraduationProject.Controllers
         [HttpPost]
         public JsonResult GetStudentName(int studentId)
         {
-            var studentName = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId)?.Name;
+            var studentName = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId)?.Name; 
 
             return Json(studentName, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult EditStudent(int studentId)
+        {
+            throw new NotImplementedException();
         }
 
         [ValidateAntiForgeryToken]

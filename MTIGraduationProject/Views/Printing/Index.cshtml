@@ -1,18 +1,16 @@
 ﻿@{
-    ViewBag.Title = "طباعة الدعاوي";
+    ViewBag.Title = "استعلام عن الدعوة";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>طباعة الدعاوي</h2>
+<h2>استعلام عن الدعوة</h2>
 
 @Html.Label("رقم الطالب")
 
 <input type="number" value="" id="StudentId" autofocus/>
 
 
-<div class="container" id="invitationList"></div>
-
-<div class="container" id="print"></div>
+<div class="container" id="invitationList" style="direction: rtl"></div>
 
 @section scripts
 {
