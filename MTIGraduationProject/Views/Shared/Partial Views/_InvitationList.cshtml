@@ -8,8 +8,8 @@
 @if (Model.Student != null && Model.InvitationsExist)
 {
     <div class="print-content font-sz-lg">
-        @using (Html.BeginForm("RegisterAttendance", "Home", FormMethod.Post, new { @class = "form-inline mb-30", }))
-        {
+
+        <form class="form-inline mb-30">
             <div class="form-group" id="newInvitation">
                 <p>
                     <a href="@Url.Action("RegisterInvitation", "Invitation")">إضافة دعوة جديدة</a>
@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label for="StudentId">الرقم العسكري /</label>
-                <a id="StudentId" href="@Url.Action("EditStudent", "Student", new { studentId = Model.Student.Id })">
+                <a id="StudentId" href="@Url.Action("EditStudent", "Student", new {studentId = Model.Student.Id})">
                     @Model.Student.Id.ToString().ConvertNumeralsToArabic()
                 </a>
             </div>
@@ -85,18 +85,21 @@
                                 @Html.DisplayFor(modelItem => item.Address)
                             </td>
                             <td>
-                                <a href="@Url.Action("EditInvitation", "Invitation", new { id = item.Id })">تعديل</a> |
-                                <a href="@Url.Action("DeleteInvitation", "Invitation", new { id = item.Id })">مسح</a>
+                                <a onclick="registerAttendee(@item.Id); return false;" href="">تسجيل</a> |
+                                <a href="@Url.Action("EditInvitation", "Invitation", new {id = item.Id})">تعديل</a> |
+                                <a href="@Url.Action("DeleteInvitation", "Invitation", new {id = item.Id})">مسح</a>
                             </td>
                         </tr>
                     }
 
                 </table>
             </div>
-        }
+        </form>
 
-        <button type="submit" class="btn btn-primary btn-lg" id="JS-register-attendance"> تسجيل حضور</button>
         <button type="button" class="btn btn-primary btn-lg" id="JS-printInvitation" onclick="printInv();"> طباعة الدعوة</button>
+        
+
+
     </div>
 
     <div class="font-sz-lg" id="printableArea" style="display: none;">
@@ -189,10 +192,3 @@ else if (!Model.InvitationsExist)
     <h1>لا توجد دعاوي مسجلة لهذا الطالب</h1>
 }
 
-<script>
-
-    function printInv() {
-        window.print();
-    }
-
-</script>

@@ -12,18 +12,10 @@ namespace MTIGraduationProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Invitation
+    public partial class Attendee
     {
-        public int Id { get; set; }
-        public Nullable<int> StudentId { get; set; }
-        public string Name { get; set; }
-        public string Relationship { get; set; }
-        public string NationalId { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string PlaceOfBirth { get; set; }
-        public string Address { get; set; }
+        public int InvitationId { get; set; }
     
-        public virtual Attendee Attendee { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual Invitation Invitation { get; set; }
     }
 }

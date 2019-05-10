@@ -7,10 +7,19 @@
 <h2 id="InvitationHeading">استعلام عن الدعوة</h2>
 
 <form class="form-inline font-sz-lg" id="FormSearchStudent">
-    @Html.Label("رقم الطالب", new{@for = "SearchStudentID"})
+    @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
 
     <input type="number" value="" id="SearchStudentId" autofocus class="form-control" />
-    
+
+    <div class="alert alert-success alert-dismissible hidden" id="Success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>نجاح!</strong> تم تسجيل الحضور بنجاح.
+    </div>
+
+    <div class="alert alert-warning alert-dismissible hidden" id="Fail">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>تحذير!</strong> تم تسجيل حضور هذا الشخص بالفعل
+    </div>
     <div class="sk-folding-cube hidden" id="loader">
         <div class="sk-cube1 sk-cube"></div>
         <div class="sk-cube2 sk-cube"></div>
@@ -31,6 +40,7 @@
         $("#SearchStudentId").on("keyup", function() {
             if ($("#SearchStudentId").val().length === 5) {
 
+                $("#SearchStudentId").blur();
                 $("#loader").removeClass("hidden");
                 $('#invitationList').load(url, { studentId: $("#SearchStudentId").val() },
                     function () {
@@ -46,6 +56,34 @@
             }
         });
 
-            
+        // Printing Content
+        function printInv() {
+            window.print();
+        }
+
+        // Registering Attendance
+        function registerAttendee(invitationId) {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RegisterAttendance","Printing")',
+                data: { invitationId: invitationId },
+                success: function (message) {
+                    if (message === "success") {
+                        $("#Success").removeClass("hidden");
+                        setTimeout(function() {
+                            $("#Success").addClass("hidden");
+                        },2000);
+                    } else {
+                        $("#Fail").removeClass("hidden");
+                        setTimeout(function() {
+                            $("#Fail").addClass("hidden");
+                        },2000);
+                    }
+                    
+                }
+                
+            });
+        }
     </script>
 }

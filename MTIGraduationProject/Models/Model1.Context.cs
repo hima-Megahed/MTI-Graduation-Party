@@ -25,6 +25,7 @@ namespace MTIGraduationProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Attendee> Attendees { get; set; }
         public virtual DbSet<Invitation> Invitations { get; set; }
         public virtual DbSet<Student> Students { get; set; }
     }

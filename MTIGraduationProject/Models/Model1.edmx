@@ -4,7 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendees">
+          <Key>
+            <PropertyRef Name="InvitationId" />
+          </Key>
+          <Property Name="InvitationId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Invitation">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +36,18 @@
           <Property Name="foodOutlet1" Type="int" />
           <Property Name="foodOutlet2" Type="int" />
         </EntityType>
+        <Association Name="FK_Attendees_Invitation">
+          <End Role="Invitation" Type="Self.Invitation" Multiplicity="1" />
+          <End Role="Attendees" Type="Self.Attendees" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Invitation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attendees">
+              <PropertyRef Name="InvitationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invitation_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="Invitation" Type="Self.Invitation" Multiplicity="*" />
@@ -43,25 +61,30 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Attendees" EntityType="Self.Attendees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invitation" EntityType="Self.Invitation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attendees_Invitation" Association="Self.FK_Attendees_Invitation">
+            <End Role="Invitation" EntitySet="Invitation" />
+            <End Role="Attendees" EntitySet="Attendees" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invitation_Student" Association="Self.FK_Invitation_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Invitation" EntitySet="Invitation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="MTI_Graduation_PartyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Invitations" EntityType="Model.Invitation" />
-          <EntitySet Name="Students" EntityType="Model.Student" />
-          <AssociationSet Name="FK_Invitation_Student" Association="Model.FK_Invitation_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Invitation" EntitySet="Invitations" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="Attendee">
+          <Key>
+            <PropertyRef Name="InvitationId" />
+          </Key>
+          <Property Name="InvitationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Invitation" Relationship="Self.FK_Attendees_Invitation" FromRole="Attendees" ToRole="Invitation" />
+        </EntityType>
         <EntityType Name="Invitation">
           <Key>
             <PropertyRef Name="Id" />
@@ -74,7 +97,8 @@
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Student" Relationship="Model.FK_Invitation_Student" FromRole="Invitation" ToRole="Student" />
+          <NavigationProperty Name="Attendee" Relationship="Self.FK_Attendees_Invitation" FromRole="Invitation" ToRole="Attendees" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Invitation_Student" FromRole="Invitation" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -87,11 +111,23 @@
           <Property Name="BusId" Type="Int32" />
           <Property Name="foodOutlet1" Type="Int32" />
           <Property Name="foodOutlet2" Type="Int32" />
-          <NavigationProperty Name="Invitations" Relationship="Model.FK_Invitation_Student" FromRole="Student" ToRole="Invitation" />
+          <NavigationProperty Name="Invitations" Relationship="Self.FK_Invitation_Student" FromRole="Student" ToRole="Invitation" />
         </EntityType>
+        <Association Name="FK_Attendees_Invitation">
+          <End Role="Invitation" Type="Self.Invitation" Multiplicity="1" />
+          <End Role="Attendees" Type="Self.Attendee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Invitation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attendees">
+              <PropertyRef Name="InvitationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invitation_Student">
-          <End Type="Model.Student" Role="Student" Multiplicity="0..1" />
-          <End Type="Model.Invitation" Role="Invitation" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Invitation" Type="Self.Invitation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
@@ -101,36 +137,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="MTI_Graduation_PartyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendees" EntityType="Self.Attendee" />
+          <EntitySet Name="Invitations" EntityType="Self.Invitation" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_Attendees_Invitation" Association="Self.FK_Attendees_Invitation">
+            <End Role="Invitation" EntitySet="Invitations" />
+            <End Role="Attendees" EntitySet="Attendees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invitation_Student" Association="Self.FK_Invitation_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Invitation" EntitySet="Invitations" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="MTI_Graduation_PartyEntities">
+          <EntitySetMapping Name="Attendees">
+            <EntityTypeMapping TypeName="Model.Attendee">
+              <MappingFragment StoreEntitySet="Attendees">
+                <ScalarProperty Name="InvitationId" ColumnName="InvitationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Invitations">
             <EntityTypeMapping TypeName="Model.Invitation">
               <MappingFragment StoreEntitySet="Invitation">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="Model.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="foodOutlet2" ColumnName="foodOutlet2" />
-                <ScalarProperty Name="foodOutlet1" ColumnName="foodOutlet1" />
-                <ScalarProperty Name="BusId" ColumnName="BusId" />
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
-                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="foodOutlet1" ColumnName="foodOutlet1" />
+                <ScalarProperty Name="foodOutlet2" ColumnName="foodOutlet2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
