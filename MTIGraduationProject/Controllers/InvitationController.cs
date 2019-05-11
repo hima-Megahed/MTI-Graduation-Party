@@ -142,11 +142,13 @@ namespace MTIGraduationProject.Controllers
         public ActionResult DeleteInvitation(int id)
         {
             var invitation = _mtiGraduationPartyEntities.Invitations.First(i => i.Id == id);
+            int studentId = invitation.StudentId.GetValueOrDefault();
 
             _mtiGraduationPartyEntities.Invitations.Remove(invitation);
             _mtiGraduationPartyEntities.SaveChanges();
+            
 
-            return Json("success", JsonRequestBehavior.AllowGet);
+            return Json(new { message = "success", studentId = studentId.ToString() }, JsonRequestBehavior.AllowGet);
         }
 
         

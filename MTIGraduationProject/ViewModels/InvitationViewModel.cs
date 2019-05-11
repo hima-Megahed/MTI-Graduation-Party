@@ -15,7 +15,7 @@ namespace MTIGraduationProject.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        [ValidStudentId(ErrorMessage ="هذا الطالب غير موجود")]
+        [StudentExist(ErrorMessage ="هذا الطالب غير موجود")]
         public int? StudentId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
@@ -25,6 +25,8 @@ namespace MTIGraduationProject.ViewModels
         public string Relationship { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [MaxLength(14, ErrorMessage = "الرقم القومي يجب ألا يزيد عن 14 رقم")]
+        [MinLength(14, ErrorMessage = "الرقم القومي يجب ألا يقل عن 14 رقم")]
         public string NationalId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]

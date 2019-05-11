@@ -44,6 +44,7 @@ namespace MTIGraduationProject.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.RegisteredSuccessfully = false;
+                studentViewModel.Id = 0;
                 return View(studentViewModel);
             }
 
@@ -103,7 +104,7 @@ namespace MTIGraduationProject.Controllers
         [HttpPost]
         public ActionResult EditStudent(StudentViewModel studentViewModel)
         {
-            if (!ModelState.IsValid && !(new ValidStudentId().IsValidNewStudentId(studentViewModel.Id)))
+            if (!ModelState.IsValid && !(new StudentExist().IsValidNewStudentId(studentViewModel.Id)))
             {
                 ViewBag.RegisteredSuccessfully = false;
                 return View("RegisterStudent", studentViewModel);

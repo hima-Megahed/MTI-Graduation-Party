@@ -87,7 +87,6 @@
             }
         });
 
-
         // Printing Content
         function printInv() {
             window.print();
@@ -137,14 +136,15 @@
                     if (result === true) {
                         $.post('@Url.Action("DeleteInvitation", "Invitation")',
                             { id: invitationId },
-                            function(message) {
-                                if (message === "success") {
+                            function(resultObject) {
+                                if (resultObject.message === "success") {
                                     $("#DeleteSuccess").removeClass("hidden");
-
+                                    
                                     setTimeout(function() {
                                         $("#DeleteSuccess").addClass("hidden");
-                                        window.location.href = '@Url.Action("Index",new {studentId = Model})';
-                                    },1000);
+                                        window.location.href = '/Printing?studentId=' + resultObject.studentId;
+                                    }, 1000);
+                                   
                                 } else {
                                     $("#DeleteFail").removeClass("hidden");
                                     setTimeout(function() {

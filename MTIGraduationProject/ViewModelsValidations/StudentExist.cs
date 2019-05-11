@@ -7,7 +7,7 @@ using MTIGraduationProject.Models;
 
 namespace MTIGraduationProject.ViewModelsValidations
 {
-    public class ValidStudentId : ValidationAttribute
+    public class StudentExist : ValidationAttribute
     {
         public override bool IsValid(object value)
         {

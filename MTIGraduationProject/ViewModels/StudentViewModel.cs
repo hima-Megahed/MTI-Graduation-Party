@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using MTIGraduationProject.Controllers;
+using MTIGraduationProject.ViewModelsValidations;
 
 namespace MTIGraduationProject.ViewModels
 {
@@ -10,6 +11,7 @@ namespace MTIGraduationProject.ViewModels
     {
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [Range(1, 99999, ErrorMessage = "رقم الطالب غير صحيح")]
+        [ValidLengthStudentId(ErrorMessage = "رقم الطالب يجب أن يكون 5 أرقام")]
         public int Id { get; set; }
 
         [Required(ErrorMessage="هذا الحقل مطلوب")]
