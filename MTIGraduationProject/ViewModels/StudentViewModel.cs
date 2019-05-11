@@ -9,7 +9,7 @@ namespace MTIGraduationProject.ViewModels
     public class StudentViewModel
     {
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        [Range(0, 99999, ErrorMessage = "رقم الطالب غير صحيح")]
+        [Range(1, 99999, ErrorMessage = "رقم الطالب غير صحيح")]
         public int Id { get; set; }
 
         [Required(ErrorMessage="هذا الحقل مطلوب")]

@@ -25,8 +25,8 @@ namespace MTIGraduationProject.Models
         public string Specialization { get; set; }
         public Nullable<int> TableId { get; set; }
         public Nullable<int> BusId { get; set; }
-        public Nullable<int> foodOutlet1 { get; set; }
-        public Nullable<int> foodOutlet2 { get; set; }
+        public Nullable<int> FoodOutlet1 { get; set; }
+        public Nullable<int> FoodOutlet2 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invitation> Invitations { get; set; }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model int
+@{
     ViewBag.Title = "استعلام عن الدعوة";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,17 +10,28 @@
 <form class="form-inline font-sz-lg" id="FormSearchStudent">
     @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
 
-    <input type="number" value="" id="SearchStudentId" autofocus class="form-control" />
+    <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" />
 
-    <div class="alert alert-success alert-dismissible hidden" id="Success">
+    <div class="alert alert-success alert-dismissible hidden" id="RegistrationSuccess">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>نجاح!</strong> تم تسجيل الحضور بنجاح.
     </div>
 
-    <div class="alert alert-warning alert-dismissible hidden" id="Fail">
+    <div class="alert alert-warning alert-dismissible hidden" id="RegistrationFail">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>تحذير!</strong> تم تسجيل حضور هذا الشخص بالفعل
     </div>
+    
+    <div class="alert alert-success alert-dismissible hidden" id="DeleteSuccess">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>نجاح!</strong> تم حذف الدعوة بنجاح.
+    </div>
+    
+    <div class="alert alert-danger alert-dismissible hidden" id="DeleteFail">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>فشل!</strong> لم يتم حذف الدعوة
+    </div>
+
     <div class="sk-folding-cube hidden" id="loader">
         <div class="sk-cube1 sk-cube"></div>
         <div class="sk-cube2 sk-cube"></div>
@@ -33,6 +45,7 @@
 
 @section scripts
 {
+    <script src="~/Scripts/bootbox.min.js"></script>
     <script>
         var url = '@Url.Action("GetInvitationList", "Invitation")';
 
@@ -42,19 +55,38 @@
 
                 $("#SearchStudentId").blur();
                 $("#loader").removeClass("hidden");
-                $('#invitationList').load(url, { studentId: $("#SearchStudentId").val() },
-                    function () {
+                $('#invitationList').load(url,
+                    { studentId: $("#SearchStudentId").val() },
+                    function() {
                         setTimeout(function() {
-                            $("#loader").addClass("hidden");
-                            $("#invitationList").removeClass("hidden");
-                        }, 2000);
-                        
+                                $("#loader").addClass("hidden");
+                                $("#invitationList").removeClass("hidden");
+                            },
+                            2000);
                     });
             }
             else {
                 $("#invitationList").empty();
             }
         });
+
+        $(document).ready(function() {
+            if ($("#SearchStudentId").val().length === 5) {
+
+                $("#SearchStudentId").blur();
+                $("#loader").removeClass("hidden");
+                $('#invitationList').load(url,
+                    { studentId: $("#SearchStudentId").val() },
+                    function() {
+                        setTimeout(function() {
+                                $("#loader").addClass("hidden");
+                                $("#invitationList").removeClass("hidden");
+                            },
+                            2000);
+                    });
+            }
+        });
+
 
         // Printing Content
         function printInv() {
@@ -70,14 +102,14 @@
                 data: { invitationId: invitationId },
                 success: function (message) {
                     if (message === "success") {
-                        $("#Success").removeClass("hidden");
+                        $("#RegistrationSuccess").removeClass("hidden");
                         setTimeout(function() {
-                            $("#Success").addClass("hidden");
+                            $("#RegistrationSuccess").addClass("hidden");
                         },2000);
                     } else {
-                        $("#Fail").removeClass("hidden");
+                        $("#RegistrationFail").removeClass("hidden");
                         setTimeout(function() {
-                            $("#Fail").addClass("hidden");
+                            $("#RegistrationFail").addClass("hidden");
                         },2000);
                     }
                     
@@ -85,5 +117,47 @@
                 
             });
         }
+
+        // Deleting Invitation
+        function deleteInvitation(invitationId) {
+            bootbox.confirm({
+                message: "هل انت متأكد من مسح هذه الدعوة؟",
+                locale: 'ar',
+                buttons: {
+                    confirm: {
+                        label: 'تأكيد',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'إلغاء',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result === true) {
+                        $.post('@Url.Action("DeleteInvitation", "Invitation")',
+                            { id: invitationId },
+                            function(message) {
+                                if (message === "success") {
+                                    $("#DeleteSuccess").removeClass("hidden");
+
+                                    setTimeout(function() {
+                                        $("#DeleteSuccess").addClass("hidden");
+                                        window.location.href = '@Url.Action("Index",new {studentId = Model})';
+                                    },1000);
+                                } else {
+                                    $("#DeleteFail").removeClass("hidden");
+                                    setTimeout(function() {
+                                        $("#DeleteFail").addClass("hidden");
+                                    },1000);
+                                }
+                            });
+                    }
+                    
+                }
+            });
+        }
+
+
     </script>
 }

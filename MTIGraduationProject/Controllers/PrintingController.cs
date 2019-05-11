@@ -18,35 +18,29 @@ namespace MTIGraduationProject.Controllers
             _mtiGraduationPartyEntities = new MTI_Graduation_PartyEntities();
         }
         // GET: Printing
-        public ActionResult Index()
+        public ActionResult Index(int studentId = 0)
         {
-            return View();
+            return View(studentId);
         }
 
         [HttpPost]
         public ActionResult RegisterAttendance(int invitationId)
         {
             string message = "success";
-            var invitation = _mtiGraduationPartyEntities.Invitations.Any(i => i.Id == invitationId);
+            var invitation = _mtiGraduationPartyEntities.Invitations.FirstOrDefault(i => i.Id == invitationId);
 
-            if (!invitation)
+            if (invitation == null)
                 return HttpNotFound();
 
-            var attendanceRecord = new Attendee
+            if (invitation.Attended == true)
             {
-                InvitationId = invitationId
-            };
-
-            var attendanceExist = _mtiGraduationPartyEntities.Attendees.Any(a => a.InvitationId == invitationId);
-
-            if (attendanceExist)
                 message = "attendee Exist";
-            else
-            {
-                _mtiGraduationPartyEntities.Attendees.Add(attendanceRecord);
-                _mtiGraduationPartyEntities.SaveChanges();
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
-            
+
+            invitation.Attended = true;
+            _mtiGraduationPartyEntities.SaveChanges();
+
             return Json(message, JsonRequestBehavior.AllowGet);
         }
     }

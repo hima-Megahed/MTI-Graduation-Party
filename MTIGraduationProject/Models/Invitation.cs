@@ -22,8 +22,8 @@ namespace MTIGraduationProject.Models
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Address { get; set; }
+        public Nullable<bool> Attended { get; set; }
     
-        public virtual Attendee Attendee { get; set; }
         public virtual Student Student { get; set; }
     }
 }

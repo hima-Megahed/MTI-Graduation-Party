@@ -4,11 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="07555b1606e349fb8ccca9e34a15bf2b" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Attendee" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+      <Diagram DiagramId="3428ee6364834763b91376510fe2e0c4" Name="Diagram1">
         <EntityTypeShape EntityType="Model.Invitation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Attendees_Invitation" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Invitation_Student" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

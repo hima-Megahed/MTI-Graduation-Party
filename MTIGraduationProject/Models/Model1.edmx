@@ -5,12 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Attendees">
-          <Key>
-            <PropertyRef Name="InvitationId" />
-          </Key>
-          <Property Name="InvitationId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Invitation">
           <Key>
             <PropertyRef Name="Id" />
@@ -23,6 +17,7 @@
           <Property Name="BirthDate" Type="date" />
           <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Attended" Type="bit" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -33,21 +28,9 @@
           <Property Name="Specialization" Type="nvarchar" MaxLength="50" />
           <Property Name="TableId" Type="int" />
           <Property Name="BusId" Type="int" />
-          <Property Name="foodOutlet1" Type="int" />
-          <Property Name="foodOutlet2" Type="int" />
+          <Property Name="FoodOutlet1" Type="int" />
+          <Property Name="FoodOutlet2" Type="int" />
         </EntityType>
-        <Association Name="FK_Attendees_Invitation">
-          <End Role="Invitation" Type="Self.Invitation" Multiplicity="1" />
-          <End Role="Attendees" Type="Self.Attendees" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Invitation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Attendees">
-              <PropertyRef Name="InvitationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Invitation_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="Invitation" Type="Self.Invitation" Multiplicity="*" />
@@ -61,13 +44,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="Attendees" EntityType="Self.Attendees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invitation" EntityType="Self.Invitation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Attendees_Invitation" Association="Self.FK_Attendees_Invitation">
-            <End Role="Invitation" EntitySet="Invitation" />
-            <End Role="Attendees" EntitySet="Attendees" />
-          </AssociationSet>
           <AssociationSet Name="FK_Invitation_Student" Association="Self.FK_Invitation_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Invitation" EntitySet="Invitation" />
@@ -78,13 +56,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Attendee">
-          <Key>
-            <PropertyRef Name="InvitationId" />
-          </Key>
-          <Property Name="InvitationId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Invitation" Relationship="Self.FK_Attendees_Invitation" FromRole="Attendees" ToRole="Invitation" />
-        </EntityType>
         <EntityType Name="Invitation">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,7 +68,7 @@
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Attendee" Relationship="Self.FK_Attendees_Invitation" FromRole="Invitation" ToRole="Attendees" />
+          <Property Name="Attended" Type="Boolean" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Invitation_Student" FromRole="Invitation" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
@@ -109,22 +80,10 @@
           <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TableId" Type="Int32" />
           <Property Name="BusId" Type="Int32" />
-          <Property Name="foodOutlet1" Type="Int32" />
-          <Property Name="foodOutlet2" Type="Int32" />
+          <Property Name="FoodOutlet1" Type="Int32" />
+          <Property Name="FoodOutlet2" Type="Int32" />
           <NavigationProperty Name="Invitations" Relationship="Self.FK_Invitation_Student" FromRole="Student" ToRole="Invitation" />
         </EntityType>
-        <Association Name="FK_Attendees_Invitation">
-          <End Role="Invitation" Type="Self.Invitation" Multiplicity="1" />
-          <End Role="Attendees" Type="Self.Attendee" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Invitation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Attendees">
-              <PropertyRef Name="InvitationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Invitation_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="Invitation" Type="Self.Invitation" Multiplicity="*" />
@@ -138,13 +97,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MTI_Graduation_PartyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Attendees" EntityType="Self.Attendee" />
           <EntitySet Name="Invitations" EntityType="Self.Invitation" />
           <EntitySet Name="Students" EntityType="Self.Student" />
-          <AssociationSet Name="FK_Attendees_Invitation" Association="Self.FK_Attendees_Invitation">
-            <End Role="Invitation" EntitySet="Invitations" />
-            <End Role="Attendees" EntitySet="Attendees" />
-          </AssociationSet>
           <AssociationSet Name="FK_Invitation_Student" Association="Self.FK_Invitation_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="Invitation" EntitySet="Invitations" />
@@ -156,13 +110,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="MTI_Graduation_PartyEntities">
-          <EntitySetMapping Name="Attendees">
-            <EntityTypeMapping TypeName="Model.Attendee">
-              <MappingFragment StoreEntitySet="Attendees">
-                <ScalarProperty Name="InvitationId" ColumnName="InvitationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Invitations">
             <EntityTypeMapping TypeName="Model.Invitation">
               <MappingFragment StoreEntitySet="Invitation">
@@ -174,6 +121,7 @@
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Attended" ColumnName="Attended" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -185,8 +133,8 @@
                 <ScalarProperty Name="Specialization" ColumnName="Specialization" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />
                 <ScalarProperty Name="BusId" ColumnName="BusId" />
-                <ScalarProperty Name="foodOutlet1" ColumnName="foodOutlet1" />
-                <ScalarProperty Name="foodOutlet2" ColumnName="foodOutlet2" />
+                <ScalarProperty Name="FoodOutlet1" ColumnName="FoodOutlet1" />
+                <ScalarProperty Name="FoodOutlet2" ColumnName="FoodOutlet2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -87,7 +87,7 @@
                             <td>
                                 <a onclick="registerAttendee(@item.Id); return false;" href="">تسجيل</a> |
                                 <a href="@Url.Action("EditInvitation", "Invitation", new {id = item.Id})">تعديل</a> |
-                                <a href="@Url.Action("DeleteInvitation", "Invitation", new {id = item.Id})">مسح</a>
+                                <a onclick="deleteInvitation(@item.Id); return false;" href="">مسح</a>
                             </td>
                         </tr>
                     }
@@ -169,11 +169,11 @@
             </div>
             <div class="form-group w-7xx">
                 <label> منفذ وجبة الإفطار </label>
-                <p class="pr-30">@(Model.Student.foodOutlet1.ToString().ConvertNumeralsToArabic())</p>
+                <p class="pr-30">@(Model.Student.FoodOutlet1.ToString().ConvertNumeralsToArabic())</p>
             </div>
             <div class="form-group">
                 <label> منفذ وجبة الإفطار </label>
-                <p class="pr-30">@(Model.Student.foodOutlet2.ToString().ConvertNumeralsToArabic())</p>
+                <p class="pr-30">@(Model.Student.FoodOutlet2.ToString().ConvertNumeralsToArabic())</p>
             </div>
 
         </div>

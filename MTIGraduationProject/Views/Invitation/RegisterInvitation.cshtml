@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
         @Html.Label("تاريخ الميلاد")
-        @Html.TextBoxFor(i => i.BirthDate, new { type = "date" })
+        @Html.EditorFor(i => i.BirthDate)
         @Html.ValidationMessageFor(i => i.BirthDate)
     </div>
     <div class="form-group">
@@ -97,6 +97,30 @@
             }
         });
 
-
+        // showing Student Name when editing student
+        $(document).ready(function(parameters) {
+            if ($("#StudentId").val().length === 5) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetStudentName", "Student")',
+                    data: JSON.stringify({studentId: $("#StudentId").val()}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(studentName) {
+                        if (studentName != null) {
+                            $("#StudentName").val(studentName);
+                        } else {
+                            $("#StudentName").val('هذاالرقم غير صحيح او غير مسجل');
+                        }
+                    },
+                    failure: function(response) {
+                        $("#StudentName").val('هذاالرقم غير صحيح او غير مسجل');
+                    },
+                    error: function(response) {
+                        $("#StudentName").val('هذاالرقم غير صحيح او غير مسجل');
+                    }
+                });
+            }
+        });
     </script>
 }

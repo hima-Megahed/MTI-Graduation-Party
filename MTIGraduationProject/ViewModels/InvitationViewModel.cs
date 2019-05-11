@@ -28,6 +28,8 @@ namespace MTIGraduationProject.ViewModels
         public string NationalId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? BirthDate { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
