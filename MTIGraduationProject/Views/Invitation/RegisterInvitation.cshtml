@@ -5,7 +5,7 @@
 }
 <h2> تسجيل دعوة جديدة </h2>
 
-@using (Html.BeginForm(Model.Action, "Invitation", FormMethod.Post))
+@using (Html.BeginForm(Model.Action, "Invitation", FormMethod.Post, new {@class = "form-inline", id="RegisterInvitation"}))
 {
     <div class="alert alert-success alert-dismissible" style="display: @(ViewBag.RegisteredSuccessfully? "block" : "none")">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -18,18 +18,18 @@
     @Html.HiddenFor(i => i.Id)
     <div class="form-group">
         @Html.Label("رقم الطالب")
-        @Html.TextBoxFor(i => i.StudentId, new { type = "number" })
+        @Html.TextBoxFor(i => i.StudentId, new { type = "number", @class="form-control" })
         @Html.ValidationMessageFor(i => i.StudentId)
         @Html.TextBox("StudentName", null, new { disabled = "disabled", style = "border: 0px; background: transparent;" })
     </div>
     <div class="form-group">
         @Html.Label("اسم المدعو")
-        @Html.TextBoxFor(i => i.Name, new { type = "text" })
+        @Html.TextBoxFor(i => i.Name, new { type = "text", @class="form-control" })
         @Html.ValidationMessageFor(i => i.Name)
     </div>
     <div class="form-group">
         @Html.Label("الرقم القومي")
-        @Html.TextBoxFor(i => i.NationalId, new { type = "number" })
+        @Html.TextBoxFor(i => i.NationalId, new { type = "number", @class="form-control" })
         @Html.ValidationMessageFor(i => i.NationalId)
     </div>
     <div class="form-group">
@@ -39,17 +39,17 @@
     </div>
     <div class="form-group">
         @Html.Label("درجة القرابة")
-        @Html.TextBoxFor(i => i.Relationship, new { type = "text" })
+        @Html.TextBoxFor(i => i.Relationship, new { type = "text", @class="form-control"})
         @Html.ValidationMessageFor(i => i.Relationship)
     </div>
     <div class="form-group">
         @Html.Label("محل الميلاد")
-        @Html.TextBoxFor(i => i.PlaceOfBirth, new { type = "text" })
+        @Html.TextBoxFor(i => i.PlaceOfBirth, new { type = "text", @class="form-control" })
         @Html.ValidationMessageFor(i => i.PlaceOfBirth)
     </div>
     <div class="form-group">
         @Html.Label("العنوان")
-        @Html.TextBoxFor(i => i.Address, new { type = "text" })
+        @Html.TextBoxFor(i => i.Address, new { type = "text", @class="form-control" })
         @Html.ValidationMessageFor(i => i.Address)
     </div>
 
@@ -122,5 +122,8 @@
                 });
             }
         });
+
+        // Adding class form-control
+        $("#BirthDate").addClass('form-control');
     </script>
 }

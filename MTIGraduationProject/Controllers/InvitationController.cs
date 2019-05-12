@@ -150,7 +150,6 @@ namespace MTIGraduationProject.Controllers
 
             return Json(new { message = "success", studentId = studentId.ToString() }, JsonRequestBehavior.AllowGet);
         }
-
         
     }
 }

@@ -25,11 +25,10 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="Specialization" Type="nvarchar" MaxLength="50" />
           <Property Name="TableId" Type="int" />
           <Property Name="BusId" Type="int" />
-          <Property Name="FoodOutlet1" Type="int" />
-          <Property Name="FoodOutlet2" Type="int" />
+          <Property Name="BreakfastOutlet" Type="int" />
+          <Property Name="LunchOutlet" Type="int" />
         </EntityType>
         <Association Name="FK_Invitation_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
@@ -77,11 +76,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TableId" Type="Int32" />
           <Property Name="BusId" Type="Int32" />
-          <Property Name="FoodOutlet1" Type="Int32" />
-          <Property Name="FoodOutlet2" Type="Int32" />
+          <Property Name="BreakfastOutlet" Type="Int32" />
+          <Property Name="LunchOutlet" Type="Int32" />
           <NavigationProperty Name="Invitations" Relationship="Self.FK_Invitation_Student" FromRole="Student" ToRole="Invitation" />
         </EntityType>
         <Association Name="FK_Invitation_Student">
@@ -130,11 +128,10 @@
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />
                 <ScalarProperty Name="BusId" ColumnName="BusId" />
-                <ScalarProperty Name="FoodOutlet1" ColumnName="FoodOutlet1" />
-                <ScalarProperty Name="FoodOutlet2" ColumnName="FoodOutlet2" />
+                <ScalarProperty Name="BreakfastOutlet" ColumnName="BreakfastOutlet" />
+                <ScalarProperty Name="LunchOutlet" ColumnName="LunchOutlet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

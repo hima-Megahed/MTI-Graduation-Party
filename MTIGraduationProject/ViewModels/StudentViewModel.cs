@@ -18,19 +18,16 @@ namespace MTIGraduationProject.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public string Specialization { get; set; }
-
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public int? TableId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public int? BusId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? FoodOutlet1 { get; set; }
+        public int? BreakfastOutlet { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? FoodOutlet2 { get; set; }
+        public int? LunchOutlet { get; set; }
 
         public string Action
         {

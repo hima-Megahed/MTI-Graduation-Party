@@ -5,7 +5,7 @@
 }
 <h2> تسجيل طالب جديد </h2>
 
-@using (Html.BeginForm(Model.Action, "Student", FormMethod.Post))
+@using (Html.BeginForm(Model.Action, "Student", FormMethod.Post, new {@class = "form-inline", id = "RegisterStudent"}))
 {
     <div class="alert alert-success alert-dismissible" style="display: @(ViewBag.RegisteredSuccessfully? "block" : "none")">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -18,38 +18,33 @@
 
     <div class="form-group">
         @Html.Label("رقم الطالب")
-        @Html.TextBoxFor(m => m.Id, new { type = "number", autocomplete="off" })
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control", type = "number", autocomplete="off", style = "margin-right: 65px;" })
         @Html.ValidationMessageFor(m => m.Id)
     </div>
     <div class="form-group">
         @Html.Label("الإسم")
-        @Html.TextBoxFor(m => m.Name, new {autocomplete = "off"})
+        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", autocomplete = "off", style = "margin-right: 90px;"})
         @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
-        @Html.Label("التخصص")
-        @Html.TextBoxFor(m => m.Specialization)
-        @Html.ValidationMessageFor(m => m.Specialization)
-    </div>
-    <div class="form-group">
         @Html.Label("رقم الطاولة")
-        @Html.TextBoxFor(m => m.TableId, new { type = "number" })
+        @Html.TextBoxFor(m => m.TableId, new {@class = "form-control", type = "number", style = "margin-right: 61px;" })
         @Html.ValidationMessageFor(m => m.TableId)
     </div>
     <div class="form-group">
         @Html.Label("رقم الأتوبيس")
-        @Html.TextBoxFor(m => m.BusId, new { type = "number" })
+        @Html.TextBoxFor(m => m.BusId, new {@class = "form-control", type = "number", style = "margin-right: 53px;" })
         @Html.ValidationMessageFor(m => m.BusId)
     </div>
     <div class="form-group">
-        @Html.Label("منفذ بيع الوجبة الأول")
-        @Html.TextBoxFor(m => m.FoodOutlet1, new { type = "number" })
-        @Html.ValidationMessageFor(m => m.FoodOutlet1)
+        @Html.Label("منفذ تقديم وجبة الإفطار")
+        @Html.TextBoxFor(m => m.BreakfastOutlet, new {@class = "form-control", type = "number", style = "margin-right: 5px;" })
+        @Html.ValidationMessageFor(m => m.BreakfastOutlet)
     </div>
     <div class="form-group">
-        @Html.Label("منفذ بيع الوجبة الثاني")
-        @Html.TextBoxFor(m => m.FoodOutlet2, new { type = "number" })
-        @Html.ValidationMessageFor(m => m.FoodOutlet2)
+        @Html.Label("منفذ تقديم وجبة الغداء")
+        @Html.TextBoxFor(m => m.LunchOutlet, new {@class = "form-control", type = "number", style = "margin-right: 11px;"})
+        @Html.ValidationMessageFor(m => m.LunchOutlet)
     </div>
 
     <button type="submit" class="btn btn-primary btn-lg">تسجيل</button>
@@ -59,6 +54,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+
         setTimeout(function() {
             $(".alert-success").hide();
         }, 3000);
@@ -67,5 +63,6 @@
             if ($("#Id").val() === "0")
                 $("#Id").val('');
         });
+
     </script>
 }

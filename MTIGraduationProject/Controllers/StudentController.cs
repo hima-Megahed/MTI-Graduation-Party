@@ -53,11 +53,10 @@ namespace MTIGraduationProject.Controllers
             {
                 Id = studentViewModel.Id,
                 Name = studentViewModel.Name,
-                Specialization = studentViewModel.Specialization,
                 TableId = studentViewModel.TableId,
                 BusId = studentViewModel.BusId,
-                FoodOutlet1 = studentViewModel.FoodOutlet1,
-                FoodOutlet2 = studentViewModel.FoodOutlet2
+                BreakfastOutlet = studentViewModel.BreakfastOutlet,
+                LunchOutlet = studentViewModel.LunchOutlet
             };
 
             _mtiGraduationPartyEntities.Students.Add(student);
@@ -89,10 +88,9 @@ namespace MTIGraduationProject.Controllers
                 Id = student.Id,
                 BusId = student.BusId,
                 Name = student.Name,
-                Specialization = student.Specialization,
                 TableId = student.TableId,
-                FoodOutlet1 = student.FoodOutlet1,
-                FoodOutlet2 = student.FoodOutlet2
+                BreakfastOutlet = student.BreakfastOutlet,
+                LunchOutlet = student.LunchOutlet
             };
 
             TempData["OldStudentId"] = studentId;
@@ -119,10 +117,9 @@ namespace MTIGraduationProject.Controllers
                 // Update Student
                 oldStudent.BusId = studentViewModel.BusId;
                 oldStudent.Name = studentViewModel.Name;
-                oldStudent.Specialization = studentViewModel.Specialization;
                 oldStudent.TableId = studentViewModel.TableId;
-                oldStudent.FoodOutlet1 = studentViewModel.FoodOutlet1;
-                oldStudent.FoodOutlet2 = studentViewModel.FoodOutlet2;
+                oldStudent.BreakfastOutlet = studentViewModel.BreakfastOutlet;
+                oldStudent.LunchOutlet = studentViewModel.LunchOutlet;
 
             }
             // Student ID has changed
@@ -134,10 +131,9 @@ namespace MTIGraduationProject.Controllers
                     Id = studentViewModel.Id,
                     BusId = studentViewModel.BusId,
                     Name = studentViewModel.Name,
-                    Specialization = studentViewModel.Specialization,
                     TableId = studentViewModel.TableId,
-                    FoodOutlet1 = studentViewModel.FoodOutlet1,
-                    FoodOutlet2 = studentViewModel.FoodOutlet2
+                    BreakfastOutlet = studentViewModel.BreakfastOutlet,
+                    LunchOutlet = studentViewModel.LunchOutlet
                 };
                 // Save New Student To Database
                 _mtiGraduationPartyEntities.Students.Add(newStudent);

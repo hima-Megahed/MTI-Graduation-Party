@@ -87,7 +87,7 @@ textarea {
     width: 400px;
 }
 
-.form-group #StudentName, #Specialization {
+#InvitationPartialView #StudentName {
     font-family: sans-serif;
     font-weight: bolder;
 }
@@ -124,10 +124,19 @@ td, th {
     margin-bottom: 8px;
 }
 
-#Specialization {
+#InvitationPartialView #Specialization {
     margin-bottom: 8px;
 }
 
+#RegisterStudent .form-group {
+    margin-bottom: 25px;
+    display: block;
+}
+
+#RegisterInvitation .form-group {
+    margin-bottom: 25px;
+    display: block;
+}
 /*Printing styles*/
 @media print {
     .print-content {

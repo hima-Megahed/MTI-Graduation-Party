@@ -9,7 +9,7 @@
 {
     <div class="print-content font-sz-lg">
 
-        <form class="form-inline mb-30">
+        <form class="form-inline mb-30" id="InvitationPartialView">
             <div class="form-group" id="newInvitation">
                 <p>
                     <a href="@Url.Action("RegisterInvitation", "Invitation")">إضافة دعوة جديدة</a>
@@ -25,10 +25,6 @@
             <div class="form-group mr-30">
                 <label for="StudentName">اسم الطالب /</label>
                 <input id="StudentName" class="form-control" type="text" readonly="readonly" value="@Model.Student.Name">
-            </div>
-            <div class="form-group mr-30">
-                <label for="Specialization">التخصص /</label>
-                <input id="Specialization" class="form-control" type="text" readonly="readonly" value="@Model.Student.Specialization">
             </div>
             <div class="form-group" id="InvitationTable">
                 <table class="table table-striped">
@@ -169,11 +165,11 @@
             </div>
             <div class="form-group w-7xx">
                 <label> منفذ وجبة الإفطار </label>
-                <p class="pr-30">@(Model.Student.FoodOutlet1.ToString().ConvertNumeralsToArabic())</p>
+                <p class="pr-30">@(Model.Student.BreakfastOutlet.ToString().ConvertNumeralsToArabic())</p>
             </div>
             <div class="form-group">
-                <label> منفذ وجبة الإفطار </label>
-                <p class="pr-30">@(Model.Student.FoodOutlet2.ToString().ConvertNumeralsToArabic())</p>
+                <label> منفذ وجبة الغداء </label>
+                <p class="pr-30">@(Model.Student.LunchOutlet.ToString().ConvertNumeralsToArabic())</p>
             </div>
 
         </div>
