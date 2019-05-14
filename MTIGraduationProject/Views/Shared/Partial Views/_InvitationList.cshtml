@@ -2,7 +2,7 @@
 @model MTIGraduationProject.DTOs.InvitationDto
 @{
     var counter = 1;
-    var printHeader = "المعهد الفني للقوات المسلحة حفل تخرج الدفعة 48".ConvertNumeralsToArabic();
+    var printHeader = "حفل تخرج دفعه 48 معهد فني".ConvertNumeralsToArabic();
 }
 
 @if (Model.Student != null && Model.InvitationsExist)
@@ -100,6 +100,10 @@
 
     <div class="font-sz-lg" id="printableArea" style="display: none;">
         @{ counter = 1; }
+
+        <img id="Logo" alt="Brand" src="~/Images/logo.png">
+        <p id="header1">وزارة الدفـــاع</p>
+        <p id="header2">المعهد الفني للقوات المسلحة</p>
         <h1>@printHeader</h1>
         <div class="form-inline">
             <div class="form-group">

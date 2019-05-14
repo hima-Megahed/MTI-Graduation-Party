@@ -3,7 +3,7 @@
     ViewBag.Title = "تسجيل دعوة";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2> تسجيل دعوة جديدة </h2>
+<h2 class="form-header"> تسجيل دعوة جديدة </h2>
 
 @using (Html.BeginForm(Model.Action, "Invitation", FormMethod.Post, new {@class = "form-inline", id="RegisterInvitation"}))
 {
@@ -12,24 +12,24 @@
         <strong>نجاح!</strong> تم تسجيل الدعوة بنجاح.
     </div>
 
-    <p class="alert alert-info"> كل الحقول  <strong>مطلوبة</strong></p>
+    <h4 class="required"> كل الحقول  <strong>مطلوبة</strong></h4>
 
     @Html.AntiForgeryToken()
     @Html.HiddenFor(i => i.Id)
     <div class="form-group">
         @Html.Label("رقم الطالب")
-        @Html.TextBoxFor(i => i.StudentId, new { type = "number", @class="form-control" })
+        @Html.TextBoxFor(i => i.StudentId, new { type = "number", @class="form-control", style="right: 19px;" })
         @Html.ValidationMessageFor(i => i.StudentId)
-        @Html.TextBox("StudentName", null, new { disabled = "disabled", style = "border: 0px; background: transparent;" })
+        @Html.TextBox("StudentName", null, new { disabled = "disabled", style = "border: 0px; background: transparent; position:relative; right:40px; font-size: 18px; font-weight: 800;" })
     </div>
     <div class="form-group">
         @Html.Label("اسم المدعو")
-        @Html.TextBoxFor(i => i.Name, new { type = "text", @class="form-control" })
+        @Html.TextBoxFor(i => i.Name, new { type = "text", @class="form-control", style="right: 16px;", autocomplete="off" })
         @Html.ValidationMessageFor(i => i.Name)
     </div>
     <div class="form-group">
         @Html.Label("الرقم القومي")
-        @Html.TextBoxFor(i => i.NationalId, new { type = "number", @class="form-control" })
+        @Html.TextBoxFor(i => i.NationalId, new { type = "number", @class="form-control", style="right: 10px;" })
         @Html.ValidationMessageFor(i => i.NationalId)
     </div>
     <div class="form-group">
@@ -39,17 +39,17 @@
     </div>
     <div class="form-group">
         @Html.Label("درجة القرابة")
-        @Html.TextBoxFor(i => i.Relationship, new { type = "text", @class="form-control"})
+        @Html.TextBoxFor(i => i.Relationship, new { type = "text", @class="form-control", style="right: 10px;"})
         @Html.ValidationMessageFor(i => i.Relationship)
     </div>
     <div class="form-group">
         @Html.Label("محل الميلاد")
-        @Html.TextBoxFor(i => i.PlaceOfBirth, new { type = "text", @class="form-control" })
+        @Html.TextBoxFor(i => i.PlaceOfBirth, new { type = "text", @class="form-control", style="right: 15px;" })
         @Html.ValidationMessageFor(i => i.PlaceOfBirth)
     </div>
     <div class="form-group">
         @Html.Label("العنوان")
-        @Html.TextBoxFor(i => i.Address, new { type = "text", @class="form-control" })
+        @Html.TextBoxFor(i => i.Address, new { type = "text", @class="form-control", style="right: 35px;" })
         @Html.ValidationMessageFor(i => i.Address)
     </div>
 
@@ -123,7 +123,8 @@
             }
         });
 
-        // Adding class form-control
+        // Adding class form-control to birthdate field
+        $("#BirthDate").addClass('form-control');
         $("#BirthDate").addClass('form-control');
     </script>
 }

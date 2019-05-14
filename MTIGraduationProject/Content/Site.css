@@ -26,7 +26,7 @@ textarea {
 /*Bootstrab Overrides*/
 .navbar-inverse {
     background-color: #008cba;
-    border-color: #006687;
+    border-color: #ffffff;
 }
 
 .navbar-inverse .navbar-brand {
@@ -44,14 +44,14 @@ textarea {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: #ffffff;
+    color: #000000;
 }
 
-.navbar-inverse .navbar-nav > li > a:hover,
-.navbar-inverse .navbar-nav > li > a:focus {
-    color: #ffffff;
-    background-color: #006687;
-}
+    .navbar-inverse .navbar-nav > li > a:hover,
+    .navbar-inverse .navbar-nav > li > a:focus {
+        color: #ffffff;
+        background-color: #018619;
+    }
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
@@ -74,13 +74,46 @@ textarea {
     background-color: #006687;
 }
 
+.navbar-brand {
+    margin-bottom: 19px;
+    position: relative;
+    top: -15px;
+}
+
+.navbar-header {
+    position: relative;
+    right: 1400px;
+    margin-top: 3px;
+}
+
+
+.navbar-nav {
+    padding-top: 10px;
+    font-size: 21px;
+    position: relative;
+    right: 84px;
+}
+
 .container-fluid {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    background-color: #008cba;
+    background-color: #ffffff;
 }
+
+.form-inline .form-control {
+    width: 100%;
+    position: relative;
+}
+
+.field-validation-error {
+    margin-right: 30px;
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+}
+
 
 /*User defined styles*/
 .form-group #StudentName {
@@ -91,8 +124,19 @@ textarea {
     font-family: sans-serif;
     font-weight: bolder;
 }
+
 .font-sz-lg {
     font-size: large;
+}
+
+.form-header {
+    color: darkblue;
+    margin-bottom: 33px;
+}
+
+.required {
+    color: blue;
+    margin-bottom: 20px;
 }
 
 .mr-30 {
@@ -137,8 +181,24 @@ td, th {
     margin-bottom: 25px;
     display: block;
 }
+
+#BirthDate {
+    right: 10px;
+    text-align: right;
+}
+
+#Logo {
+    width: 100px;
+    height: 100px;
+}
+
+
 /*Printing styles*/
 @media print {
+    body {
+        padding: 0;
+    }
+
     .print-content {
         display: none !important;
     }
@@ -149,7 +209,9 @@ td, th {
         border: aliceblue;
         padding-right: 0;
         margin-right: 0;
-        padding-bottom: 20px;
+        font-family: sans-serif;
+        font-weight: bolder;
+        margin-top: 0;
     }
 
     #FormTable {
@@ -187,6 +249,8 @@ td, th {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
+        position: relative;
+        top: -51px;
     }
 
     .form-inline input {
@@ -197,7 +261,12 @@ td, th {
         border: 1px solid #ddd;
     }
 
-    /* Add some margins for each label */
+    .navbar-header {
+        position: relative;
+        right: 1400px;
+        margin-top: 3px;
+    }
+
     .form-inline label {
         margin: 5px 10px 5px 0;
     }
@@ -213,6 +282,35 @@ td, th {
 
     .pr-30 {
         padding-right: 30px;
+    }
+
+    footer {
+        display: none;
+    }
+
+    #Logo {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        right: 900px;
+    }
+
+    #header1 {
+        right: -30px;
+        position: relative;
+        top: -22px;
+    }
+
+    #header2 {
+        right: -157px;
+        position: relative;
+        top: 5px;
+    }
+
+    h1 {
+        position: relative;
+        top: -16px;
+        right: -22px;
     }
 }
 

@@ -3,7 +3,7 @@
     ViewBag.Title = "تسجيل طالب";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2> تسجيل طالب جديد </h2>
+<h2 class="form-header"> تسجيل طالب جديد </h2>
 
 @using (Html.BeginForm(Model.Action, "Student", FormMethod.Post, new {@class = "form-inline", id = "RegisterStudent"}))
 {
@@ -12,7 +12,7 @@
         <strong>نجاح!</strong> تم تسجيل الطالب بنجاح.
     </div>
 
-    <p class="alert alert-info"> كل الحقول  <strong>مطلوبة</strong></p>
+    <h4 class="required"> كل الحقول  <strong>مطلوبة</strong></h4>
 
     @Html.AntiForgeryToken()
 

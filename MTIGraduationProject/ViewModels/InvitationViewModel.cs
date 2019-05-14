@@ -15,6 +15,7 @@ namespace MTIGraduationProject.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
+        [ValidLengthStudentId(ErrorMessage = "رقم الطالب يجب أن يكون 5 أرقام")]
         [StudentExist(ErrorMessage ="هذا الطالب غير موجود")]
         public int? StudentId { get; set; }
 
