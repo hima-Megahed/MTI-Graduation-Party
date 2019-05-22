@@ -23,3 +23,398 @@ textarea {
     max-width: 280px;
 }
 
+/*Bootstrab Overrides*/
+.navbar-inverse {
+    background-color: #008cba;
+    border-color: #ffffff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: #ffffff;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-text {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #000000;
+}
+
+    .navbar-inverse .navbar-nav > li > a:hover,
+    .navbar-inverse .navbar-nav > li > a:focus {
+        color: #ffffff;
+        background-color: #018619;
+    }
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #006687;
+}
+
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+    color: #444444;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #006687;
+}
+
+.navbar-brand {
+    margin-bottom: 19px;
+    position: relative;
+    top: -15px;
+}
+
+.navbar-header {
+    position: relative;
+    right: 1200px;
+    margin-top: 3px;
+}
+
+
+.navbar-nav {
+    padding-top: 10px;
+    font-size: 21px;
+    position: relative;
+    right: 84px;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #ffffff;
+}
+
+.form-inline .form-control {
+    width: 100%;
+    position: relative;
+}
+
+.field-validation-error {
+    margin-right: 30px;
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+}
+
+
+/*User defined styles*/
+.form-group #StudentName {
+    width: 400px;
+}
+
+#InvitationPartialView #StudentName {
+    font-family: sans-serif;
+    font-weight: bolder;
+}
+
+.font-sz-lg {
+    font-size: large;
+}
+
+.form-header {
+    color: darkblue;
+    margin-bottom: 33px;
+}
+
+.required {
+    color: blue;
+    margin-bottom: 20px;
+}
+
+.mr-30 {
+    margin-right: 30px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+td, th {
+    text-align: center;
+}
+
+#invitationList {
+    margin-top: 20px;
+    padding-right: 0;
+}
+
+#newInvitation {
+    display: block;
+}
+
+#InvitationTable {
+    margin-top: 30px;
+}
+
+#StudentName {
+    margin-bottom: 8px;
+}
+
+#InvitationPartialView #Specialization {
+    margin-bottom: 8px;
+}
+
+#RegisterStudent .form-group {
+    margin-bottom: 25px;
+    display: block;
+}
+
+#RegisterInvitation .form-group {
+    margin-bottom: 25px;
+    display: block;
+}
+
+#BirthDate {
+    right: 10px;
+    text-align: right;
+}
+
+#Logo {
+    width: 100px;
+    height: 100px;
+}
+
+
+/*Printing styles*/
+@media print {
+    body {
+        padding: 0;
+    }
+
+    .print-content {
+        display: none !important;
+    }
+
+    .form-group #StudentName {
+        width: 340px;
+        max-width: 700px;
+        border: aliceblue;
+        padding-right: 0;
+        margin-right: 0;
+        font-family: sans-serif;
+        font-weight: bolder;
+        margin-top: 0;
+    }
+
+    #FormTable {
+        display: contents;
+        margin-bottom: 50px;
+    }
+
+    #InvitationHeading {
+        display: none !important;
+    }
+
+    #printableArea {
+        display: block !important;
+    }
+
+    #printableArea h1 {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    #FormSearchStudent {
+        display: none !important;
+    }
+
+    #PrintableTable {
+        margin-top: 30px;
+    }
+
+    #StudentId {
+        font-family: sans-serif;
+        font-weight: bolder;
+    }
+
+    .form-inline { 
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        position: relative;
+        top: -51px;
+    }
+
+    .form-inline input {
+        vertical-align: middle;
+        margin: 5px 10px 5px 0;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+
+    .navbar-header {
+        position: relative;
+        right: 1400px;
+        margin-top: 3px;
+    }
+
+    .form-inline label {
+        margin: 5px 10px 5px 0;
+    }
+
+    p {
+        display: inline;
+    }
+
+    .w-7xx {
+        max-width: 700px;
+        width: 500px;
+    }
+
+    .pr-30 {
+        padding-right: 30px;
+    }
+
+    footer {
+        display: none;
+    }
+
+    #Logo {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        right: 900px;
+    }
+
+    #header1 {
+        right: -30px;
+        position: relative;
+        top: -22px;
+    }
+
+    #header2 {
+        right: -157px;
+        position: relative;
+        top: 5px;
+    }
+
+    h1 {
+        position: relative;
+        top: -16px;
+        right: -22px;
+    }
+}
+
+/*Spinner Loading*/
+.sk-folding-cube {
+    margin: 20px auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+}
+
+.sk-folding-cube .sk-cube {
+    float: left;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.sk-folding-cube .sk-cube:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #333;
+        -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+        animation: sk-foldCubeAngle 2.4s infinite linear both;
+        -webkit-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+    }
+
+.sk-folding-cube .sk-cube2 {
+    -webkit-transform: scale(1.1) rotateZ(90deg);
+    transform: scale(1.1) rotateZ(90deg);
+}
+
+.sk-folding-cube .sk-cube3 {
+    -webkit-transform: scale(1.1) rotateZ(180deg);
+    transform: scale(1.1) rotateZ(180deg);
+}
+
+.sk-folding-cube .sk-cube4 {
+    -webkit-transform: scale(1.1) rotateZ(270deg);
+    transform: scale(1.1) rotateZ(270deg);
+}
+
+.sk-folding-cube .sk-cube2:before {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+.sk-folding-cube .sk-cube3:before {
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+}
+
+.sk-folding-cube .sk-cube4:before {
+        -webkit-animation-delay: 0.9s;
+        animation-delay: 0.9s;
+    }
+
+@-webkit-keyframes sk-foldCubeAngle {
+    0%, 10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+        transform: perspective(140px) rotateX(-180deg);
+        opacity: 0;
+    }
+
+    25%, 75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+        transform: perspective(140px) rotateX(0deg);
+        opacity: 1;
+    }
+
+    90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-foldCubeAngle {
+    0%, 10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+        transform: perspective(140px) rotateX(-180deg);
+        opacity: 0;
+    }
+
+    25%, 75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+        transform: perspective(140px) rotateX(0deg);
+        opacity: 1;
+    }
+
+    90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+    }
+}

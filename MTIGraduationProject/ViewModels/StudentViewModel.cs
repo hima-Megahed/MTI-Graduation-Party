@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using MTIGraduationProject.Controllers;
+using MTIGraduationProject.ViewModelsValidations;
 
 namespace MTIGraduationProject.ViewModels
 {
@@ -10,13 +11,11 @@ namespace MTIGraduationProject.ViewModels
     {
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         [Range(1, 99999, ErrorMessage = "رقم الطالب غير صحيح")]
+        [ValidLengthStudentId(ErrorMessage = "رقم الطالب يجب أن يكون 5 أرقام")]
         public int Id { get; set; }
 
         [Required(ErrorMessage="هذا الحقل مطلوب")]
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public string Specialization { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public int? TableId { get; set; }
@@ -25,18 +24,18 @@ namespace MTIGraduationProject.ViewModels
         public int? BusId { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? Chair1Id { get; set; }
+        public int? BreakfastOutlet { get; set; }
 
         [Required(ErrorMessage = "هذا الحقل مطلوب")]
-        public int? Chair2Id { get; set; }
+        public int? LunchOutlet { get; set; }
 
         public string Action
         {
             get
             {
-                Expression<Func<HomeController, ActionResult>> edit =
+                Expression<Func<StudentController, ActionResult>> edit =
                     (c => c.EditStudent(this));
-                Expression<Func<HomeController, ActionResult>> create =
+                Expression<Func<StudentController, ActionResult>> create =
                     (c => c.RegisterStudent(this));
 
                 var action = (Id != 0) ? edit : create;

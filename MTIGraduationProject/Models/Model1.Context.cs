@@ -13,10 +13,10 @@ namespace MTIGraduationProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MTI_GraduationPartyEntities : DbContext
+    public partial class MTI_Graduation_PartyEntities : DbContext
     {
-        public MTI_GraduationPartyEntities()
-            : base("name=MTI_GraduationPartyEntities")
+        public MTI_Graduation_PartyEntities()
+            : base("name=MTI_Graduation_PartyEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace MTIGraduationProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Invitation> Invitations { get; set; }
         public virtual DbSet<Student> Students { get; set; }
     }
 }

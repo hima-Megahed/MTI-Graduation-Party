@@ -14,12 +14,20 @@ namespace MTIGraduationProject.Models
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.Invitations = new HashSet<Invitation>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Specialization { get; set; }
         public Nullable<int> TableId { get; set; }
         public Nullable<int> BusId { get; set; }
-        public Nullable<int> Chair1Id { get; set; }
-        public Nullable<int> Chair2Id { get; set; }
+        public Nullable<int> BreakfastOutlet { get; set; }
+        public Nullable<int> LunchOutlet { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invitation> Invitations { get; set; }
     }
 }
