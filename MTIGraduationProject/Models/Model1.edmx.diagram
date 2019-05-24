@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="Model.Invitation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Invitation_Student" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.SystemTest" Width="1.5" PointX="3" PointY="5.625" />
+        <AssociationConnector Association="Model.FK_SystemTest_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

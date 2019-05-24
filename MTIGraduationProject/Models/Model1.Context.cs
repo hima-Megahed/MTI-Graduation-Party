@@ -27,5 +27,6 @@ namespace MTIGraduationProject.Models
     
         public virtual DbSet<Invitation> Invitations { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<SystemTest> SystemTests { get; set; }
     }
 }
