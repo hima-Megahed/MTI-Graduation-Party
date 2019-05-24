@@ -62,7 +62,7 @@
                                 $("#loader").addClass("hidden");
                                 $("#invitationList").removeClass("hidden");
                             },
-                            2000);
+                            1000);
                     });
             }
             else {
@@ -94,7 +94,6 @@
 
         // Registering Attendance
         function registerAttendee(invitationId) {
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("RegisterAttendance","Printing")',
