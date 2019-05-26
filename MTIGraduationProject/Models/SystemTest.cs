@@ -17,6 +17,7 @@ namespace MTIGraduationProject.Models
         public int id { get; set; }
         public Nullable<int> StudentId { get; set; }
         public Nullable<bool> StudentStatus { get; set; }
+        public string StudentName { get; set; }
     
         public virtual Student Student { get; set; }
     }

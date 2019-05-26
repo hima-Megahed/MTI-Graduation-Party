@@ -36,6 +36,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="200" />
           <Property Name="StudentStatus" Type="bit" />
         </EntityType>
         <Association Name="FK_Invitation_Student">
@@ -140,6 +141,7 @@
           <Property Name="StudentId" Type="Int32" />
           <Property Name="StudentStatus" Type="Boolean" />
           <NavigationProperty Name="Student" Relationship="Model.FK_SystemTest_Student" FromRole="SystemTest" ToRole="Student" />
+          <Property Name="StudentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SystemTest_Student">
           <End Type="Model.Student" Role="Student" Multiplicity="0..1" />
@@ -189,6 +191,7 @@
           <EntitySetMapping Name="SystemTests">
             <EntityTypeMapping TypeName="Model.SystemTest">
               <MappingFragment StoreEntitySet="SystemTest">
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
                 <ScalarProperty Name="StudentStatus" ColumnName="StudentStatus" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="id" ColumnName="id" />

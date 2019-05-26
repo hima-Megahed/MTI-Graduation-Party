@@ -4,13 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2 class="form-header" id="SystemTestHeading">تجربة تسجيل طالب</h2>
 
-<h2 class="form-header" id="InvitationHeading">تجربة تسجيل طالب</h2>
 
-<form class="form-inline font-sz-lg" id="FormSearchStudent">
-    @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
+<form class="form-inline font-sz-lg print-content" id="FormSearchStudent">
+    
 
-    <input type="number" id="SearchStudentId" autofocus class="form-control" />
+    @Html.Label("رقم الطالب", new {@for = "SearchStudentID"})
+
+    <input type="number" id="SearchStudentId" autofocus class="form-control"/>
 
     <div class="alert alert-success alert-dismissible hidden" id="RegistrationSuccess">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -34,16 +36,18 @@
         <div class="sk-cube3 sk-cube"></div>
     </div>
 
+    <button type="button" class="btn btn-primary btn-lg" id="SystemTestPrintButton" onclick="printStudents();"> طباعة الطلاب المسجلين</button>
 </form>
 
+<div class="container hidden" id="SystemTestPrintableArea">
+
+</div>
 
 @section scripts
 {
     <script>
-
-        var url = '@Url.Action("GetInvitationList", "Invitation")';
-
-        // loading Partial View with Invitations
+        
+        // Registering Students
         $("#SearchStudentId").on("keyup", function () {
             if ($("#SearchStudentId").val().length === 5) {
 
@@ -89,5 +93,19 @@
             }
         });
 
+        // Printing All Registered Students
+        function printStudents() {
+            var url = '@Url.Action("GetAllStudents", "SystemTest")';
+
+            // loading Partial View with students
+            $('#SystemTestPrintableArea').load(url, function() {
+                // Printing Students
+                window.print();
+            });
+
+            
+        }
+
+        
     </script>
 }
