@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using MTIGraduationProject.Models;
@@ -42,12 +43,19 @@ namespace MTIGraduationProject.Controllers
             var systemTest = new SystemTest
             {
                 StudentId = studentId,
+                StudentName = _mtiGraduationPartyEntities.Students.First(s => s.Id == studentId).Name,
                 StudentStatus = true
             };
 
             _mtiGraduationPartyEntities.SystemTests.Add(systemTest);
             _mtiGraduationPartyEntities.SaveChanges();
             return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAllStudents()
+        {
+            var systemTestsStudents = _mtiGraduationPartyEntities.SystemTests.AsEnumerable();
+            return PartialView("Partial Views/SystemTestPrintStudents", systemTestsStudents);
         }
     }
 }

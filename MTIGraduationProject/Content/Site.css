@@ -82,7 +82,7 @@ textarea {
 
 .navbar-header {
     position: relative;
-    right: 1200px;
+    right: 1100px;
     margin-top: 3px;
 }
 
@@ -149,6 +149,14 @@ textarea {
 
 td, th {
     text-align: center;
+}
+
+#SearchStudentId {
+    display: block;
+}
+
+#SystemTestPrintButton {
+    margin-top: 30px;
 }
 
 #invitationList {
@@ -311,6 +319,18 @@ td, th {
         position: relative;
         top: -16px;
         right: -22px;
+    }
+
+    #SystemTestPrintableArea {
+        display: block !important;
+    }
+
+    #SystemTestHeading {
+        display: none !important;
+    }
+
+    title {
+        display: none !important;
     }
 }
 

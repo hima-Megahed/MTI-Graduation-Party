@@ -1,0 +1,38 @@
+﻿@using MTIGraduationProject.Helpers
+@model IEnumerable<MTIGraduationProject.Models.SystemTest>
+@{
+    var counter = 1;
+    var printHeader = "حفل تخرج دفعه 48 معهد فني".ConvertNumeralsToArabic();
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.Label("#")
+        </th>
+        <th>
+            @Html.Label("رقم الطالب")
+        </th>
+        <th>
+            @Html.Label("اسم الطالب")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @(counter++.ToString().ConvertNumeralsToArabic())
+            </td>
+            <td>
+                @{ var arabicStudentId = item.StudentId.ToString().ConvertNumeralsToArabic();}
+                @Html.DisplayFor(modelItem => arabicStudentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+        </tr>
+    }
+
+</table>
