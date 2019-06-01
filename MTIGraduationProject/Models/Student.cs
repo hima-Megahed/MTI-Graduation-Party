@@ -17,8 +17,8 @@ namespace MTIGraduationProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.Invitations = new HashSet<Invitation>();
             this.SystemTests = new HashSet<SystemTest>();
+            this.Invitations = new HashSet<Invitation>();
         }
     
         public int Id { get; set; }
@@ -29,8 +29,8 @@ namespace MTIGraduationProject.Models
         public Nullable<int> LunchOutlet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invitation> Invitations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SystemTest> SystemTests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invitation> Invitations { get; set; }
     }
 }
