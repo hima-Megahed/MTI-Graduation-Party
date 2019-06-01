@@ -190,5 +190,9 @@ else if (Model.Student == null)
 else if (!Model.InvitationsExist)
 {
     <h1>لا توجد دعاوي مسجلة لهذا الطالب</h1>
+    <script>
+        $("#SearchStudentId").val("");
+        $("#SearchStudentId").focus();
+    </script>
 }
 
