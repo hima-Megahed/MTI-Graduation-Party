@@ -39,6 +39,7 @@ namespace MTIGraduationProject.Controllers
             }
 
             invitation.Attended = true;
+            invitation.PresenceDateTime = DateTime.Now;
             _mtiGraduationPartyEntities.SaveChanges();
 
             return Json(message, JsonRequestBehavior.AllowGet);

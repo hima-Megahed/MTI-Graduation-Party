@@ -23,6 +23,7 @@ namespace MTIGraduationProject.Models
         public string PlaceOfBirth { get; set; }
         public string Address { get; set; }
         public Nullable<bool> Attended { get; set; }
+        public Nullable<System.DateTime> PresenceDateTime { get; set; }
     
         public virtual Student Student { get; set; }
     }
