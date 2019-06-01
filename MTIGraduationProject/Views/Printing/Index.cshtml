@@ -10,7 +10,7 @@
 <form class="form-inline font-sz-lg" id="FormSearchStudent">
     @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
 
-    <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" />
+    <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" onclick="select()"/>
 
     <div class="alert alert-success alert-dismissible hidden" id="RegistrationSuccess">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -90,6 +90,8 @@
         // Printing Content
         function printInv() {
             window.print();
+            $("#SearchStudentId").focus();
+            $("#SearchStudentId").select();
         }
 
         // Registering Attendance
@@ -156,7 +158,6 @@
                 }
             });
         }
-
 
     </script>
 }
