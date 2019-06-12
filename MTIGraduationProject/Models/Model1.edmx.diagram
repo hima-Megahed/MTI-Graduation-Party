@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4160859a244c4a9492332d6cd7a8264d" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SystemTest" Width="1.5" PointX="3" PointY="5.625" />
-        <AssociationConnector Association="Model.FK_SystemTest_Student" />
-        <EntityTypeShape EntityType="Model.Invitation" Width="1.5" PointX="3" PointY="1" />
-        <AssociationConnector Association="Model.FK_Invitation_Student" />
+      <Diagram DiagramId="bd2cdff22763467fa07b55f21b3d588a" Name="Diagram1">
+        <EntityTypeShape EntityType="MTI_GraduationPartyModel.Invitation" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTI_GraduationPartyModel.Student" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTI_GraduationPartyModel.SystemTest" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="MTI_GraduationPartyModel.FK_Invitation_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="MTI_GraduationPartyModel.FK_SystemTest_Student" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

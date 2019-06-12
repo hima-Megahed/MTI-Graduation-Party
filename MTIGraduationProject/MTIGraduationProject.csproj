@@ -142,6 +142,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ArabicNumeralHelper.cs" />
+    <Compile Include="Models\AttendeesBusReport_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Invitation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -237,7 +240,8 @@
     <Content Include="Views\Printing\Index.cshtml" />
     <Content Include="Views\Shared\Partial Views\_InvitationList.cshtml" />
     <Content Include="Views\SystemTest\Index.cshtml" />
-    <Content Include="Views\Shared\Partial Views\SystemTestPrintStudents.cshtml" />
+    <Content Include="Views\Shared\Partial Views\_SystemTestPrintStudents.cshtml" />
+    <Content Include="Views\Shared\Partial Views\_BusesReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

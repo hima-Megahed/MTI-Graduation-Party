@@ -44,5 +44,12 @@ namespace MTIGraduationProject.Controllers
 
             return Json(message, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult PrintAttendeesWithBuses()
+        {
+            var attendeesBusReport_Results = _mtiGraduationPartyEntities.AttendeesBusReport().AsEnumerable();
+            return PartialView("Partial Views/_BusesReport", attendeesBusReport_Results);
+
+        }
     }
 }
