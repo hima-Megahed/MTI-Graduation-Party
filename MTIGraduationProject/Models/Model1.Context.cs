@@ -12,6 +12,8 @@ namespace MTIGraduationProject.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MTI_Graduation_PartyEntities : DbContext
     {
@@ -25,8 +27,13 @@ namespace MTIGraduationProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Invitation> Invitations { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<SystemTest> SystemTests { get; set; }
-        public virtual DbSet<Invitation> Invitations { get; set; }
+    
+        public virtual ObjectResult<AttendeesBusReport_Result> AttendeesBusReport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AttendeesBusReport_Result>("AttendeesBusReport");
+        }
     }
 }

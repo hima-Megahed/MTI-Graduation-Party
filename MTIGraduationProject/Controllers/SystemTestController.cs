@@ -55,7 +55,7 @@ namespace MTIGraduationProject.Controllers
         public ActionResult GetAllStudents()
         {
             var systemTestsStudents = _mtiGraduationPartyEntities.SystemTests.AsEnumerable();
-            return PartialView("Partial Views/SystemTestPrintStudents", systemTestsStudents);
+            return PartialView("Partial Views/_SystemTestPrintStudents", systemTestsStudents);
         }
     }
 }

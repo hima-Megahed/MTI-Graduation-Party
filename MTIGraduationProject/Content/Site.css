@@ -207,6 +207,10 @@ td, th {
         padding: 0;
     }
 
+    #BusesReportPrintableArea {
+        display: block !important;
+    }
+
     .print-content {
         display: none !important;
     }
@@ -296,6 +300,10 @@ td, th {
         display: none;
     }
 
+    .container {
+        margin-top: 0 !important;
+    }
+
     #Logo {
         width: 100px;
         height: 100px;
@@ -306,19 +314,23 @@ td, th {
     #header1 {
         right: -30px;
         position: relative;
-        top: -22px;
+        top: -39px;
     }
 
     #header2 {
-        right: -157px;
+        right: -152px;
         position: relative;
-        top: 5px;
+        top: -13px;
     }
 
     h1 {
         position: relative;
-        top: -16px;
-        right: -22px;
+        top: -30px;
+        right: 10px;
+    }
+
+    #StudentName{
+        margin-right:270px;
     }
 
     #SystemTestPrintableArea {
@@ -330,6 +342,16 @@ td, th {
     }
 
     title {
+        display: none !important;
+    }
+
+    /*****Buses Report*****/
+
+    .jumbotron {
+        display: none !important;
+    }
+
+    .row {
         display: none !important;
     }
 }

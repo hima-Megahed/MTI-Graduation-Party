@@ -1,0 +1,46 @@
+﻿@using MTIGraduationProject.Helpers
+@model IEnumerable<MTIGraduationProject.Models.AttendeesBusReport_Result>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.Label("رقم الطالب")
+        </th>
+        <th>
+            @Html.Label("اسم المدعو")
+        </th>
+        <th>
+            @Html.Label("الرقم القومي")
+        </th>
+        <th>
+            @Html.Label("درجة القرابة")
+        </th>
+        <th>
+            @Html.Label("رقم الأتوبيس")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @{ var arabicStudentId = item.StudentId;}
+        @Html.DisplayFor(modelItem => arabicStudentId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NationalId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Relationship)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BusId)
+    </td>
+</tr>
+    }
+
+</table>
