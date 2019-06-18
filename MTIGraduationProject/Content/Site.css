@@ -229,6 +229,8 @@ td, th {
     #FormTable {
         display: contents;
         margin-bottom: 50px;
+        font-size: larger;
+        font-weight: bold;
     }
 
     #InvitationHeading {
@@ -315,22 +317,20 @@ td, th {
         right: -30px;
         position: relative;
         top: -39px;
+        font-weight: bold;
     }
 
     #header2 {
         right: -152px;
         position: relative;
         top: -13px;
+        font-weight: bold;
     }
 
     h1 {
         position: relative;
         top: -30px;
         right: 10px;
-    }
-
-    #StudentName{
-        margin-right:270px;
     }
 
     #SystemTestPrintableArea {
@@ -353,6 +353,55 @@ td, th {
 
     .row {
         display: none !important;
+    }
+
+    .font-sz-larger {
+        font-size: larger;
+    }
+
+    .mycontainer {
+        position: relative;
+        top: -31px;
+    }
+
+    .no-porder {
+        border: none;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .block {
+        display: block;
+    }
+
+    .border {
+        border: #000000;
+    }
+
+    .border-top {
+        border-top-style: dashed; 
+    }
+    
+    .border-left {
+        border-left-style: dashed;
+    }
+
+    .mt-10 {
+        margin-top: 10px;
+    }
+
+    .text-underline {
+        text-decoration: underline;
+    }
+
+    .mr-330 {
+        margin-right: 330px;
+    }
+
+    .pr-50 {
+        padding-right: 50px;
     }
 }
 
