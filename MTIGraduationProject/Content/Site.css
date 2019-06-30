@@ -298,9 +298,7 @@ td, th {
         padding-right: 30px;
     }
 
-    footer {
-        display: none;
-    }
+     
 
     .container {
         margin-top: 0 !important;
@@ -364,7 +362,7 @@ td, th {
         top: -31px;
     }
 
-    .no-porder {
+    .no-border {
         border: none;
     }
 
@@ -402,6 +400,10 @@ td, th {
 
     .pr-50 {
         padding-right: 50px;
+    }
+
+    .pt-15 {
+        padding-top: 15px;
     }
 }
 
