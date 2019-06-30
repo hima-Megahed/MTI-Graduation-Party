@@ -39,9 +39,17 @@ namespace MTIGraduationProject.Controllers
             }
 
             invitation.Attended = true;
+            invitation.PresenceDateTime = DateTime.Now;
             _mtiGraduationPartyEntities.SaveChanges();
 
             return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult PrintAttendeesWithBuses()
+        {
+            var attendeesBusReport_Results = _mtiGraduationPartyEntities.AttendeesBusReport().AsEnumerable();
+            return PartialView("Partial Views/_BusesReport", attendeesBusReport_Results);
+
         }
     }
 }

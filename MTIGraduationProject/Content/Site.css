@@ -47,8 +47,8 @@ textarea {
     color: #000000;
 }
 
-    .navbar-inverse .navbar-nav > li > a:hover,
-    .navbar-inverse .navbar-nav > li > a:focus {
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
         color: #ffffff;
         background-color: #018619;
     }
@@ -82,7 +82,7 @@ textarea {
 
 .navbar-header {
     position: relative;
-    right: 1200px;
+    right: 1100px;
     margin-top: 3px;
 }
 
@@ -151,6 +151,14 @@ td, th {
     text-align: center;
 }
 
+#SearchStudentId {
+    display: block;
+}
+
+#SystemTestPrintButton {
+    margin-top: 30px;
+}
+
 #invitationList {
     margin-top: 20px;
     padding-right: 0;
@@ -199,6 +207,10 @@ td, th {
         padding: 0;
     }
 
+    #BusesReportPrintableArea {
+        display: block !important;
+    }
+
     .print-content {
         display: none !important;
     }
@@ -217,6 +229,8 @@ td, th {
     #FormTable {
         display: contents;
         margin-bottom: 50px;
+        font-size: larger;
+        font-weight: bold;
     }
 
     #InvitationHeading {
@@ -284,8 +298,10 @@ td, th {
         padding-right: 30px;
     }
 
-    footer {
-        display: none;
+     
+
+    .container {
+        margin-top: 0 !important;
     }
 
     #Logo {
@@ -298,19 +314,96 @@ td, th {
     #header1 {
         right: -30px;
         position: relative;
-        top: -22px;
+        top: -39px;
+        font-weight: bold;
     }
 
     #header2 {
-        right: -157px;
+        right: -152px;
         position: relative;
-        top: 5px;
+        top: -13px;
+        font-weight: bold;
     }
 
     h1 {
         position: relative;
-        top: -16px;
-        right: -22px;
+        top: -30px;
+        right: 10px;
+    }
+
+    #SystemTestPrintableArea {
+        display: block !important;
+    }
+
+    #SystemTestHeading {
+        display: none !important;
+    }
+
+    title {
+        display: none !important;
+    }
+
+    /*****Buses Report*****/
+
+    .jumbotron {
+        display: none !important;
+    }
+
+    .row {
+        display: none !important;
+    }
+
+    .font-sz-larger {
+        font-size: larger;
+    }
+
+    .mycontainer {
+        position: relative;
+        top: -31px;
+    }
+
+    .no-border {
+        border: none;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .block {
+        display: block;
+    }
+
+    .border {
+        border: #000000;
+    }
+
+    .border-top {
+        border-top-style: dashed; 
+    }
+    
+    .border-left {
+        border-left-style: dashed;
+    }
+
+    .mt-10 {
+        margin-top: 10px;
+    }
+
+    .text-underline {
+        text-decoration: underline;
+    }
+
+    .mr-330 {
+        margin-right: 330px;
+    }
+
+    .pr-50 {
+        padding-right: 50px;
+    }
+
+    .pt-15 {
+        padding-top: 15px;
     }
 }
 

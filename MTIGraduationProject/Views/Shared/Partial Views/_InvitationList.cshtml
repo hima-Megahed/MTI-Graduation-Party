@@ -3,6 +3,7 @@
 @{
     var counter = 1;
     var printHeader = "حفل تخرج دفعه 48 معهد فني".ConvertNumeralsToArabic();
+    var numberOfMeals = 2;
 }
 
 @if (Model.Student != null && Model.InvitationsExist)
@@ -30,7 +31,7 @@
                 <table class="table table-striped">
                     <tr>
                         <th>
-                            @Html.Label("#")
+                            @Html.Label("مسلسل")
                         </th>
                         <th>
                             @Html.Label("اسم المدعو")
@@ -43,12 +44,6 @@
                         </th>
                         <th>
                             @Html.Label("تاريخ الميلاد")
-                        </th>
-                        <th>
-                            @Html.Label("محل الميلاد")
-                        </th>
-                        <th>
-                            @Html.Label("العنوان")
                         </th>
 
                         <th></th>
@@ -75,12 +70,6 @@
                                 @Html.DisplayFor(modelItem => arabicBirthDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </td>
-                            <td>
                                 <a onclick="registerAttendee(@item.Id); return false;" href="">تسجيل</a> |
                                 <a href="@Url.Action("EditInvitation", "Invitation", new {id = item.Id})">تعديل</a> |
                                 <a onclick="deleteInvitation(@item.Id); return false;" href="">مسح</a>
@@ -102,15 +91,15 @@
         @{ counter = 1; }
 
         <img id="Logo" alt="Brand" src="~/Images/logo.png">
-        <p id="header1">وزارة الدفـــاع</p>
-        <p id="header2">المعهد الفني للقوات المسلحة</p>
-        <h1>@printHeader</h1>
+        <p id="header1" class="text-underline">وزارة الدفـــاع</p>
+        <p id="header2" class="text-underline">المعهد الفني للقوات المسلحة</p>
+        <h1 class="text-underline bold">@printHeader</h1>
         <div class="form-inline">
-            <div class="form-group">
+            <div class="form-group font-sz-larger">
                 <label for="StudentId">الرقم العسكري /</label>
                 <p id="StudentId">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
             </div>
-            <div class="form-group pr-30">
+            <div class="form-group mr-330 font-sz-larger" id="StudentName">
                 <label for="StudentName">اسم الطالب /</label>
                 <input id="StudentName" value="@Model.Student.Name" class="">
             </div>
@@ -118,7 +107,7 @@
                 <table class="table table-striped" id="PrintableTable">
                     <tr>
                         <th>
-                            @Html.Label("#")
+                            @Html.Label("مسلسل")
                         </th>
                         <th>
                             @Html.Label("اسم المدعو")
@@ -167,16 +156,47 @@
 
                 </table>
             </div>
-            <div class="form-group w-7xx">
+        </div>
+            
+        
+        
+        <div class="footer font-sz-larger">
+            <div class="border border-top border-left col-xs-6 pt-15">
+                <label for="StudentId">الرقم العسكري /</label>
+                <p id="StudentId" class="">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
+                <br />
+
+                <label for="StudentName" >اسم الطالب /</label>
+                <input id="StudentName" value="@Model.Student.Name" class="no-border bold">
+                <br />
+
                 <label> منفذ وجبة الإفطار </label>
-                <p class="pr-30">@(Model.Student.BreakfastOutlet.ToString().ConvertNumeralsToArabic())</p>
-            </div>
-            <div class="form-group">
-                <label> منفذ وجبة الغداء </label>
-                <p class="pr-30">@(Model.Student.LunchOutlet.ToString().ConvertNumeralsToArabic())</p>
+                <p class="pr-30 bold">@(Model.Student.BreakfastOutlet.ToString().ConvertNumeralsToArabic())</p>
+                <br />
+
+                <p class="bold">عدد الوجبات: (@numberOfMeals.ToString().ConvertNumeralsToArabic()) وجبة إفطار</p>
             </div>
 
+            <div class="border border-top col-xs-6 pr-50 pt-15">
+                <label for="StudentId">الرقم العسكري /</label>
+                <p id="StudentId" class="">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
+                <br />
+
+                <label for="StudentName">اسم الطالب /</label>
+                <input id="StudentName" value="@Model.Student.Name" class="no-border bold">
+                <br />
+
+                <label> منفذ وجبة الغداء </label>
+                <p class="pr-30 bold">@(Model.Student.LunchOutlet.ToString().ConvertNumeralsToArabic())</p>
+                <br />
+
+                <p class="bold">عدد الوجبات: (@numberOfMeals.ToString().ConvertNumeralsToArabic()) وجبة غداء</p>
+            </div>
+            
         </div>
+        
+
+        
 
 
 
@@ -190,5 +210,9 @@ else if (Model.Student == null)
 else if (!Model.InvitationsExist)
 {
     <h1>لا توجد دعاوي مسجلة لهذا الطالب</h1>
+    <script>
+        $("#SearchStudentId").val("");
+        $("#SearchStudentId").focus();
+    </script>
 }
 

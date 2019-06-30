@@ -136,11 +136,15 @@
     <Compile Include="Controllers\InvitationController.cs" />
     <Compile Include="Controllers\PrintingController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SystemTestController.cs" />
     <Compile Include="DTOs\InvitationDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ArabicNumeralHelper.cs" />
+    <Compile Include="Models\AttendeesBusReport_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Invitation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -160,6 +164,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemTest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -232,6 +239,9 @@
     <Content Include="Views\Invitation\RegisterInvitation.cshtml" />
     <Content Include="Views\Printing\Index.cshtml" />
     <Content Include="Views\Shared\Partial Views\_InvitationList.cshtml" />
+    <Content Include="Views\SystemTest\Index.cshtml" />
+    <Content Include="Views\Shared\Partial Views\_SystemTestPrintStudents.cshtml" />
+    <Content Include="Views\Shared\Partial Views\_BusesReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
