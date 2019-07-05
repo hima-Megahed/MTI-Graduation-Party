@@ -19,6 +19,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="Attended" Type="bit" />
           <Property Name="PresenceDateTime" Type="datetime" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -97,6 +98,7 @@
           <Property Name="Attended" Type="Boolean" />
           <Property Name="PresenceDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Invitation_Student" FromRole="Invitation" ToRole="Student" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -175,6 +177,7 @@
           <EntitySetMapping Name="Invitations">
             <EntityTypeMapping TypeName="MTI_GraduationPartyModel.Invitation">
               <MappingFragment StoreEntitySet="Invitation">
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

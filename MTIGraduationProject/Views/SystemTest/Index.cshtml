@@ -24,7 +24,7 @@
         <strong>تحذير!</strong> تم تسجيل حضور هذا الشخص بالفعل
     </div>
 
-    <div class="alert alert-danger alert-dismissible hidden" id="RegistrationFail">
+    <div class="alert alert-danger alert-dismissible hidden" id="RegisteredAlready">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>فشل!</strong> هذا الطالب غير مسجل
     </div>
@@ -76,9 +76,9 @@
                             },1500);
                         } else {
                             $("#loader").addClass("hidden");
-                            $("#RegistrationFail").removeClass("hidden");
+                            $("#RegisteredAlready").removeClass("hidden");
                             setTimeout(function () {
-                                $("#RegistrationFail").addClass("hidden");
+                                $("#RegisteredAlready").addClass("hidden");
                                 $("#SearchStudentId").val("");
                                 $("#SearchStudentId").focus();
                             },1500);

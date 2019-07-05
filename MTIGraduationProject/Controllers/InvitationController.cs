@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using MTIGraduationProject.DTOs;
 using MTIGraduationProject.Models;
 using MTIGraduationProject.ViewModels;
@@ -123,7 +124,7 @@ namespace MTIGraduationProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetInvitationList(int studentId)
+        public ActionResult GetInvitationList(int studentId, InvitationContext invitationContext = InvitationContext.Printing)
         {
             var student = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId);
             var invitationList = _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId).ToList();
@@ -132,7 +133,8 @@ namespace MTIGraduationProject.Controllers
             {
                 Invitations = invitationList,
                 InvitationsExist = (invitationList.Count != 0),
-                Student = student
+                Student = student,
+                InvitationContext = invitationContext
             };
 
             return PartialView("Partial Views/_InvitationList", invitationDto);
@@ -149,6 +151,40 @@ namespace MTIGraduationProject.Controllers
             
 
             return Json(new { message = "success", studentId = studentId.ToString() }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult ApproveInvitation(int studentId = 0)
+        {
+            return View(studentId);
+        }
+
+        [HttpPost]
+        public ActionResult ApproveInvitation(int invitationId, int? studentId)
+        {
+            var invitation = _mtiGraduationPartyEntities.Invitations.First(i => i.Id == invitationId);
+
+            if (invitation.Approved)
+                return Json(new { message = "ApprovedAlready" }, JsonRequestBehavior.AllowGet);
+
+            invitation.Approved = true;
+            _mtiGraduationPartyEntities.SaveChanges();
+
+            return Json(new { message = "success", studentId = invitation.StudentId }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult RefuseInvitation(int invitationId)
+        {
+            var invitation = _mtiGraduationPartyEntities.Invitations.First(i => i.Id == invitationId);
+
+            if (!invitation.Approved)
+                return Json(new { message = "ApprovedAlready" }, JsonRequestBehavior.AllowGet);
+
+            invitation.Approved = false;
+            _mtiGraduationPartyEntities.SaveChanges();
+
+            return Json(new { message = "success", studentId = invitation.StudentId }, JsonRequestBehavior.AllowGet);
         }
         
     }

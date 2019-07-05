@@ -10,26 +10,36 @@
 <form class="form-inline font-sz-lg" id="FormSearchStudent">
     @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
 
-    <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" onclick="select()"/>
+    <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" onclick="select()" />
 
     <div class="alert alert-success alert-dismissible hidden" id="RegistrationSuccess">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>نجاح!</strong> تم تسجيل الحضور بنجاح.
     </div>
 
-    <div class="alert alert-warning alert-dismissible hidden" id="RegistrationFail">
+    <div class="alert alert-warning alert-dismissible hidden" id="RegisteredAlready">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>تحذير!</strong> تم تسجيل حضور هذا الشخص بالفعل
     </div>
-    
+
     <div class="alert alert-success alert-dismissible hidden" id="DeleteSuccess">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>نجاح!</strong> تم حذف الدعوة بنجاح.
     </div>
-    
+
     <div class="alert alert-danger alert-dismissible hidden" id="DeleteFail">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>فشل!</strong> لم يتم حذف الدعوة
+    </div>
+
+    <div class="alert alert-success alert-dismissible hidden" id="ApprovingSuccess">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>نجاح!</strong> تم التصديق بنجاح.
+    </div>
+
+    <div class="alert alert-danger alert-dismissible hidden" id="ApprovingFail">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>فشل!</strong> لم يتم التصديق
     </div>
 
     <div class="sk-folding-cube hidden" id="loader">
@@ -90,8 +100,9 @@
         // Printing Content
         function printInv() {
             window.print();
+            $("#invitationList").empty();
+            $("#SearchStudentId").val("");
             $("#SearchStudentId").focus();
-            $("#SearchStudentId").select();
         }
 
         // Registering Attendance
@@ -107,9 +118,9 @@
                             $("#RegistrationSuccess").addClass("hidden");
                         },1000);
                     } else {
-                        $("#RegistrationFail").removeClass("hidden");
+                        $("#RegisteredAlready").removeClass("hidden");
                         setTimeout(function() {
-                            $("#RegistrationFail").addClass("hidden");
+                            $("#RegisteredAlready").addClass("hidden");
                         },1000);
                     }
                     
@@ -157,6 +168,27 @@
                     
                 }
             });
+        }
+
+        // Approving Attendee
+        function ApproveAttendee(invitationId) {
+            $.post('@Url.Action("ApproveInvitation", "Invitation")',
+                { id: invitationId },
+                function(result) {
+                    if (result.message === "success") {
+                        $("#ApprovingSuccess").removeClass("hidden");
+                                    
+                        setTimeout(function() {
+                            $("#ApprovingSuccess").addClass("hidden");
+                        }, 1000);
+                                   
+                    } else {
+                        $("#ApprovingFail").removeClass("hidden");
+                        setTimeout(function() {
+                            $("#ApprovingFail").addClass("hidden");
+                        },1000);
+                    }
+                });
         }
 
     </script>
