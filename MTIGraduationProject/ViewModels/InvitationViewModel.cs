@@ -34,11 +34,7 @@ namespace MTIGraduationProject.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? BirthDate { get; set; }
-
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public string PlaceOfBirth { get; set; }
-
-        [Required(ErrorMessage = "هذا الحقل مطلوب")]
         public string Address { get; set; }
 
         public string Action

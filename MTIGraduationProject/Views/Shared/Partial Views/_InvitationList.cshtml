@@ -55,59 +55,62 @@
 
                     @foreach (var invitation in Model.Invitations)
                     {
-                <tr>
-                    <td>
-                        @(counter++.ToString().ConvertNumeralsToArabic())
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => invitation.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => invitation.Relationship)
-                    </td>
-                    <td>
-                        @{ var arabicNationalId = invitation.NationalId.ConvertNumeralsToArabic();}
-                        @Html.DisplayFor(modelItem => arabicNationalId)
-                    </td>
-                    <td>
-                        @{ var arabicBirthDate = invitation.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
-                        @Html.DisplayFor(modelItem => arabicBirthDate)
-                    </td>
-                    <td>
-                        @if (invitation.Approved)
-                        {
-                            <img src="~/Images/baseline-check_circle-24px (1).svg" alt="" />
-                        }
-                        else
-                        {
-                            <img src="~/Images/baseline-block-24px.svg" alt="" />
-                        }
+                        <tr>
+                            <td>
+                                @(counter++.ToString().ConvertNumeralsToArabic())
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => invitation.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => invitation.Relationship)
+                            </td>
+                            <td>
+                                @{ var arabicNationalId = invitation.NationalId.ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicNationalId)
+                            </td>
+                            <td>
+                                @{ var arabicBirthDate = invitation.BirthDate?.ToString("yyyy/MM/dd").ConvertNumeralsToArabic();}
+                                @Html.DisplayFor(modelItem => arabicBirthDate)
+                            </td>
+                            <td>
+                                @if (invitation.Approved)
+                                {
+                                    <img src="~/Images/baseline-check_circle-24px (1).svg" alt="" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/baseline-block-24px.svg" alt="" />
+                                }
 
-                    </td>
-                    <td>
-                        @if (Model.InvitationContext == InvitationContext.Printing)
-                        {
-                            <a onclick="registerAttendee(@invitation.Id);return false;" href=""> تسجيل حضور</a> <span>|</span>
-                            <a href="@Url.Action("EditInvitation", "Invitation", new {id = invitation.Id})">تعديل</a> <span>|</span>
-                            <a onclick="deleteInvitation(@invitation.Id);return false;" href="">مسح</a>
-                        }
-                        else
-                        {
-                            <a onclick="ApproveAttendee(@invitation.Id);return false;" href="">تصديق</a> <span> | </span>
-                            <a onclick="RefuseAttendee(@invitation.Id);return false;" href="">إلغاء التصديق</a>
-                        }
+                            </td>
+                            <td>
+                                @if (Model.InvitationContext == InvitationContext.Printing)
+                                {
+                                    <a onclick="registerAttendee(@invitation.Id);return false;" href=""> تسجيل حضور</a> <span>|</span>
+                                    <a href="@Url.Action("EditInvitation", "Invitation", new {id = invitation.Id})">تعديل</a> <span>|</span>
+                                    <a onclick="deleteInvitation(@invitation.Id);return false;" href="">مسح</a>
+                                }
+                                else
+                                {
+                                    <a onclick="ApproveAttendee(@invitation.Id);return false;" href="">تصديق</a> <span> | </span>
+                                    <a onclick="RefuseAttendee(@invitation.Id);return false;" href="">إلغاء التصديق</a>
+                                }
 
 
-                    </td>
-                </tr>
+                            </td>
+                        </tr>
                     }
 
                 </table>
             </div>
         </form>
+        @if (Model.InvitationContext == InvitationContext.Printing)
+        {
+            <button type="button" class="btn btn-primary btn-lg" id="JS-printInvitation" onclick="printInv();"> طباعة الدعوة</button>
+        }
 
-        <button type="button" class="btn btn-primary btn-lg" id="JS-printInvitation" onclick="printInv();"> طباعة الدعوة</button>
-        
+
 
 
     </div>
