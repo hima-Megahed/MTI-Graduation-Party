@@ -131,6 +131,47 @@
                         },500);
                     }
                 });
+            }
+
+        // Deleting Invitation
+        function deleteInvitation(invitationId) {
+            bootbox.confirm({
+                message: "هل انت متأكد من مسح هذه الدعوة؟",
+                locale: 'ar',
+                buttons: {
+                    confirm: {
+                        label: 'تأكيد',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'إلغاء',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result === true) {
+                        $.post('@Url.Action("DeleteInvitation", "Invitation")',
+                            { id: invitationId },
+                            function(resultObject) {
+                                if (resultObject.message === "success") {
+                                    $("#DeleteSuccess").removeClass("hidden");
+                                    
+                                    setTimeout(function() {
+                                        $("#DeleteSuccess").addClass("hidden");
+                                        window.location.href = '/Printing?studentId=' + resultObject.studentId;
+                                    }, 1000);
+                                   
+                                } else {
+                                    $("#DeleteFail").removeClass("hidden");
+                                    setTimeout(function() {
+                                        $("#DeleteFail").addClass("hidden");
+                                    },1000);
+                                }
+                            });
+                    }
+                    
+                }
+            });
         }
 
     </script>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -90,7 +91,7 @@ namespace MTIGraduationProject.Controllers
                 Relationship = invitation.Relationship
             };
 
-            
+
             return View("RegisterInvitation", invitationViewModel);
         }
 
@@ -120,14 +121,24 @@ namespace MTIGraduationProject.Controllers
             _mtiGraduationPartyEntities.SaveChanges();
 
             TempData["RegisteredSuccessfully"] = true;
-            return RedirectToAction("RegisterInvitation", new InvitationViewModel{Id = 0});
+            return RedirectToAction("RegisterInvitation", new InvitationViewModel { Id = 0 });
         }
 
         [HttpPost]
-        public ActionResult GetInvitationList(int studentId, InvitationContext invitationContext = InvitationContext.Printing)
+        // ReSharper disable once InconsistentNaming
+        public ActionResult GetInvitationList(string attendeeSSN, int studentId = 0, InvitationContext invitationContext = InvitationContext.Printing)
         {
+            studentId = !attendeeSSN.IsNullOrWhiteSpace() && _mtiGraduationPartyEntities.Invitations.Any(i => i.NationalId == attendeeSSN)
+                // ReSharper disable once PossibleInvalidOperationException
+                ? _mtiGraduationPartyEntities.Invitations.First(i => i.NationalId == attendeeSSN).StudentId.Value
+                : studentId;
+
             var student = _mtiGraduationPartyEntities.Students.FirstOrDefault(s => s.Id == studentId);
-            var invitationList = _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId).ToList();
+
+            var invitationList = invitationContext == InvitationContext.Printing
+                ? _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId && i.Approved).ToList()
+                : _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId).ToList();
+
 
             var invitationDto = new InvitationDto
             {
@@ -148,7 +159,7 @@ namespace MTIGraduationProject.Controllers
 
             _mtiGraduationPartyEntities.Invitations.Remove(invitation);
             _mtiGraduationPartyEntities.SaveChanges();
-            
+
 
             return Json(new { message = "success", studentId = studentId.ToString() }, JsonRequestBehavior.AllowGet);
         }
@@ -186,6 +197,6 @@ namespace MTIGraduationProject.Controllers
 
             return Json(new { message = "success", studentId = invitation.StudentId }, JsonRequestBehavior.AllowGet);
         }
-        
+
     }
 }

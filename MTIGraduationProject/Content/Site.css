@@ -151,10 +151,6 @@ td, th {
     text-align: center;
 }
 
-#SearchStudentId {
-    display: block;
-}
-
 #SystemTestPrintButton {
     margin-top: 30px;
 }
@@ -174,6 +170,10 @@ td, th {
 
 #StudentName {
     margin-bottom: 8px;
+}
+
+#SearchAttendeeSSNLabel {
+    margin-right: 180px;
 }
 
 #InvitationPartialView #Specialization {

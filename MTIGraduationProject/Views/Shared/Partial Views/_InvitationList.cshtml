@@ -94,7 +94,9 @@
                                 else
                                 {
                                     <a onclick="ApproveAttendee(@invitation.Id);return false;" href="">تصديق</a> <span> | </span>
-                                    <a onclick="RefuseAttendee(@invitation.Id);return false;" href="">إلغاء التصديق</a>
+                                    <a onclick="RefuseAttendee(@invitation.Id);return false;" href="">إلغاء التصديق</a> <span>|</span>
+                                    <a href="@Url.Action("EditInvitation", "Invitation", new {id = invitation.Id})">تعديل</a> <span>|</span>
+                                    <a onclick="deleteInvitation(@invitation.Id);return false;" href="">مسح</a>
                                 }
 
 

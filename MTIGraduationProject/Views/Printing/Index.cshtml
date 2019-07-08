@@ -9,8 +9,12 @@
 
 <form class="form-inline font-sz-lg" id="FormSearchStudent">
     @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
-
     <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" onclick="select()" />
+
+    
+    @Html.Label("رقم بطاقة المدعو", new { @for = "SearchAttendeeSSN", id="SearchAttendeeSSNLabel" })
+
+    <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchAttendeeSSN" autofocus class="form-control" onclick="select()" />
 
     <div class="alert alert-success alert-dismissible hidden" id="RegistrationSuccess">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -59,7 +63,7 @@
     <script>
         var url = '@Url.Action("GetInvitationList", "Invitation")';
 
-        // loading Partial View with Invitations
+        // loading Partial View with Invitations On StudentId
         $("#SearchStudentId").on("keyup", function() {
             if ($("#SearchStudentId").val().length === 5) {
 
@@ -97,11 +101,35 @@
             }
         });
 
+        // loading Partial View with Invitations On SSN
+        $("#SearchAttendeeSSN").on("keyup", function() {
+            if ($("#SearchAttendeeSSN").val().length === 14) {
+
+                $("#SearchAttendeeSSN").blur();
+                $("#loader").removeClass("hidden");
+                $('#invitationList').load(url,
+                    { attendeeSSN: $("#SearchAttendeeSSN").val() },
+                    function() {
+                        setTimeout(function() {
+                                $("#loader").addClass("hidden");
+                                $("#invitationList").removeClass("hidden");
+                            },
+                            1000);
+                    });
+            }
+            else {
+                $("#invitationList").empty();
+            }
+        });
+
         // Printing Content
         function printInv() {
             window.print();
             $("#invitationList").empty();
+
             $("#SearchStudentId").val("");
+            $("#SearchAttendeeSSN").val("");
+
             $("#SearchStudentId").focus();
         }
 
