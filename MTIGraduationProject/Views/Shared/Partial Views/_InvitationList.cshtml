@@ -130,7 +130,7 @@
                 <p id="StudentId">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
             </div>
             <div class="form-group mr-330 font-sz-larger" id="StudentName">
-                <label for="StudentName">اسم الطالب /</label>
+                <label for="StudentName">اسم الخريج /</label>
                 <input id="StudentName" value="@Model.Student.Name" class="">
             </div>
             <div class="form-group" id="FormTable">
@@ -191,36 +191,25 @@
         
         
         <div class="footer font-sz-larger">
-            <div class="border border-top border-left col-xs-6 pt-15">
-                <label for="StudentId">الرقم العسكري /</label>
-                <p id="StudentId" class="">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
-                <br />
+            <div class="border border-top col-xs-12 pt-15 pb-15">
+                <label for="StudentName">اسم الخريج /</label>
+                <input id="StudentName" value="@Model.Student.Name" class="no-border bold pr-15">
 
-                <label for="StudentName" >اسم الطالب /</label>
-                <input id="StudentName" value="@Model.Student.Name" class="no-border bold">
-                <br />
+                <label class="pr-30">منفذ وجبة الغداء / </label>
+                <p class="pr-15 pl-15 bold">@(Model.Student.LunchOutlet.ToString().ConvertNumeralsToArabic())</p>
 
-                <label> منفذ وجبة الإفطار </label>
-                <p class="pr-30 bold">@(Model.Student.BreakfastOutlet.ToString().ConvertNumeralsToArabic())</p>
-                <br />
-
-                <p class="bold">عدد الوجبات: (@numberOfMeals.ToString().ConvertNumeralsToArabic()) وجبة إفطار</p>
+                <p class="bold pr-30">عدد الوجبات / (@numberOfMeals.ToString().ConvertNumeralsToArabic()) وجبة غداء</p>
             </div>
 
-            <div class="border border-top col-xs-6 pr-50 pt-15">
-                <label for="StudentId">الرقم العسكري /</label>
-                <p id="StudentId" class="">@Model.Student.Id.ToString().ConvertNumeralsToArabic()</p>
-                <br />
+            <div class="border border-top col-xs-12 pt-15">
+                <label for="StudentName">اسم الخريج /</label>
+                <input id="StudentName" value="@Model.Student.Name" class="no-border bold pr-15">
 
-                <label for="StudentName">اسم الطالب /</label>
-                <input id="StudentName" value="@Model.Student.Name" class="no-border bold">
-                <br />
+                <label class="pr-30">منفذ وجبة الإفطار / </label>
+                <p class="pr-15 pl-15 bold">@(Model.Student.BreakfastOutlet.ToString().ConvertNumeralsToArabic())</p>
 
-                <label> منفذ وجبة الغداء </label>
-                <p class="pr-30 bold">@(Model.Student.LunchOutlet.ToString().ConvertNumeralsToArabic())</p>
-                <br />
-
-                <p class="bold">عدد الوجبات: (@numberOfMeals.ToString().ConvertNumeralsToArabic()) وجبة غداء</p>
+                <p class="bold pr-30">عدد الوجبات / (@numberOfMeals.ToString().ConvertNumeralsToArabic()) وجبة إفطار</p>
+                
             </div>
             
         </div>
