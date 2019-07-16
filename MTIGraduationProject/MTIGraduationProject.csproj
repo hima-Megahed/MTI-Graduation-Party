@@ -190,7 +190,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Images\baseline-block-24px.svg" />
     <Content Include="Images\baseline-check_circle-24px %281%29.svg" />
-    <Content Include="Images\baseline-check_circle_outline-24px.svg" />
+    <Content Include="Images\iconfinder_16_171497.svg" />
     <Content Include="Images\logo.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -246,6 +246,7 @@
     <Content Include="Views\Shared\Partial Views\_SystemTestPrintStudents.cshtml" />
     <Content Include="Views\Shared\Partial Views\_BusesReport.cshtml" />
     <Content Include="Views\Invitation\ApproveInvitation.cshtml" />
+    <Content Include="Views\Shared\Partial Views\_BusCounter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

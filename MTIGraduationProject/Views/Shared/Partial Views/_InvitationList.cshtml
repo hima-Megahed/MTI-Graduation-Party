@@ -1,6 +1,5 @@
 ﻿@using MTIGraduationProject.DTOs
 @using MTIGraduationProject.Helpers
-@using MTIGraduationProject.Models
 @model MTIGraduationProject.DTOs.InvitationDto
 @{
     var counter = 1;
@@ -51,6 +50,7 @@
                             @Html.Label(" حالة التصديق")
                         </th>
                         <th></th>
+                        <th></th>
                     </tr>
 
                     @foreach (var invitation in Model.Invitations)
@@ -84,28 +84,48 @@
                                 }
 
                             </td>
-                            <td>
-                                @if (Model.InvitationContext == InvitationContext.Printing)
-                                {
-                                    <a onclick="registerAttendee(@invitation.Id);return false;" href=""> تسجيل حضور</a> <span>|</span>
+                           
+                            @if (Model.InvitationContext == InvitationContext.Printing)
+                            {
+                                <td>
                                     <a href="@Url.Action("EditInvitation", "Invitation", new {id = invitation.Id})">تعديل</a> <span>|</span>
                                     <a onclick="deleteInvitation(@invitation.Id);return false;" href="">مسح</a>
-                                }
-                                else
+                                </td>
+                                if (counter == 2)
                                 {
+                                    <td id="TableDataRegisterInvitation" rowspan="2">
+                                        <a onclick="registerAttendee(@invitation.StudentId);return false;" href=""> تسجيل حضور</a>
+                                    </td>
+                                }
+                                
+                                
+                                
+                            }
+                            else
+                            {
+                                <td>
                                     <a onclick="ApproveAttendee(@invitation.Id);return false;" href="">تصديق</a> <span> | </span>
                                     <a onclick="RefuseAttendee(@invitation.Id);return false;" href="">إلغاء التصديق</a> <span>|</span>
                                     <a href="@Url.Action("EditInvitation", "Invitation", new {id = invitation.Id})">تعديل</a> <span>|</span>
                                     <a onclick="deleteInvitation(@invitation.Id);return false;" href="">مسح</a>
-                                }
+                                </td>
+                                
+                            }
 
 
-                            </td>
+                            
                         </tr>
                     }
 
                 </table>
             </div>
+            @if (Model.InvitationContext == InvitationContext.Printing)
+            {
+                <div class="form-group" id="BusCounter">
+                    @Html.Partial("Partial Views/_BusCounter")
+                </div>
+            }
+            
         </form>
         @if (Model.InvitationContext == InvitationContext.Printing)
         {

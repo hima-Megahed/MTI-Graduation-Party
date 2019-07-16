@@ -200,6 +200,29 @@ td, th {
     height: 100px;
 }
 
+#TableDataRegisterInvitation {
+    vertical-align: middle;
+    text-align: center;
+    padding-right: 30px;
+}
+
+#BusCounter {
+    margin-top: 50px;
+    margin-right: 70px;
+}
+
+#BusLogo {
+    width: 50px;
+}
+
+#BusCounterParagraph {
+    text-align: center;
+    padding-top: 5px;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.footer {}
 
 /*Printing styles*/
 @media print {
@@ -424,6 +447,8 @@ td, th {
 }
 
 /*Spinner Loading*/
+.sk-cube1{}
+
 .sk-folding-cube {
     margin: 20px auto;
     width: 40px;

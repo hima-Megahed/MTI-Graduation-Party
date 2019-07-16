@@ -1,0 +1,6 @@
+﻿@using MTIGraduationProject.Controllers
+@using MTIGraduationProject.Helpers
+
+    <img id="BusLogo" src="~/Images/iconfinder_16_171497.svg" alt="" />
+
+    <p id="BusCounterParagraph"> @PrintingController.NextBusNumber.ToString().ConvertNumeralsToArabic() </p>
