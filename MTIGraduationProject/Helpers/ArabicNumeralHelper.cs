@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Web;
-
-namespace MTIGraduationProject.Helpers
+﻿namespace MTIGraduationProject.Helpers
 {
     public static class ArabicNumeralHelper
     {

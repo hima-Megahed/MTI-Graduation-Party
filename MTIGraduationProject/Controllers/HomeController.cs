@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Services.Configuration;
-using MTIGraduationProject.DTOs;
-using MTIGraduationProject.Models;
-using MTIGraduationProject.ViewModels;
+﻿using System.Web.Mvc;
 
 namespace MTIGraduationProject.Controllers
 {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Antlr.Runtime.Misc;
 using Microsoft.Ajax.Utilities;
 using MTIGraduationProject.DTOs;
 using MTIGraduationProject.Models;
@@ -196,6 +192,26 @@ namespace MTIGraduationProject.Controllers
             _mtiGraduationPartyEntities.SaveChanges();
 
             return Json(new { message = "success", studentId = invitation.StudentId }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult ExtraInvitationsRegistration()
+        {
+            ViewBag.RegisteredSuccessfully = false;
+
+            if (TempData.ContainsKey("RegisteredSuccessfully"))
+            {
+                ViewBag.RegisteredSuccessfully = true;
+                TempData.Remove("RegisteredSuccessfully");
+            }
+
+
+            var invitationViewModel = new InvitationViewModel()
+            {
+                Id = 0
+            };
+
+            return View("",invitationViewModel);
         }
 
     }
