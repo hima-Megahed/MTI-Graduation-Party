@@ -68,7 +68,7 @@
     <script>
 
         setInterval(function(){
-            $("#BusCounter").load('@Url.Action("GetBusNumber","Printing")');
+            $("#BusCounter").load('@Url.Action("GetBusAndTableNumbers","Printing")');
         }, 1000);
 
         
@@ -154,7 +154,7 @@
                 success: function (message) {
                     if (message === "success") {
                         $("#RegistrationSuccess").removeClass("hidden");
-                        $("#BusCounter").load('@Url.Action("GetBusNumber","Printing")');
+                        $("#BusCounter").load('@Url.Action("GetBusAndTableNumbers","Printing")');
 
                         setTimeout(function() {
                             $("#RegistrationSuccess").addClass("hidden");

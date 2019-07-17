@@ -215,6 +215,10 @@ td, th {
     width: 50px;
 }
 
+#TableLogo {
+    padding-bottom: 6px;
+}
+
 #BusCounterParagraph {
     text-align: center;
     padding-top: 5px;
@@ -222,7 +226,24 @@ td, th {
     font-weight: bolder;
 }
 
-.footer {}
+#TableCounterParagraph {
+    text-align: center;
+    padding-top: 5px;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.tablePosition {
+    position: relative;
+    right: 70px;
+}
+
+.footer {
+}
 
 /*Printing styles*/
 @media print {

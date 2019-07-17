@@ -1,0 +1,14 @@
+﻿@using MTIGraduationProject.Controllers
+@using MTIGraduationProject.Helpers
+
+<div class="inline-block">
+    <img id="BusLogo" class="form-group" src="~/Images/iconfinder_16_171497.svg" alt="" />
+
+    <p id="BusCounterParagraph"> @PrintingController.NextBusNumber.ToString().ConvertNumeralsToArabic() </p>
+</div>
+
+<div class="inline-block tablePosition">
+    <img id="TableLogo" class="form-group" src="~/Images/icons8-table-50.png" alt="" />
+
+    <p id="TableCounterParagraph"> @PrintingController.NextBusNumber.ToString().ConvertNumeralsToArabic() </p>
+</div>
