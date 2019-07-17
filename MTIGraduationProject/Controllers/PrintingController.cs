@@ -80,6 +80,7 @@ namespace MTIGraduationProject.Controllers
 
         public ActionResult PrintAttendeesWithBuses()
         {
+            ClearingAttendedAndPresenceTime();
             var attendeesBusReportResults = _mtiGraduationPartyEntities.AttendeesBusReport().AsEnumerable();
             return PartialView("Partial Views/_BusesReport", attendeesBusReportResults);
 
@@ -88,7 +89,7 @@ namespace MTIGraduationProject.Controllers
         /// <summary>
         /// Used to Fill in Food Outlets
         /// </summary>
-        private void PopulateFoodOutlets()
+        private void ClearingFoodOutlets()
         {
             var students = _mtiGraduationPartyEntities.Students.ToList();
             int Outlet1 = 1, Outlet2 = 2;
@@ -97,13 +98,13 @@ namespace MTIGraduationProject.Controllers
             {
                 if (i < (students.Count / 2))
                 {
-                    students[i].BreakfastOutlet = Outlet1;
-                    students[i].LunchOutlet = Outlet1;
+                    students[i].BreakfastOutlet = null; //Outlet1;
+                    students[i].LunchOutlet = null; //Outlet1;
                 }
                 else
                 {
-                    students[i].BreakfastOutlet = Outlet2;
-                    students[i].LunchOutlet = Outlet2;
+                    students[i].BreakfastOutlet = null; //Outlet2;
+                    students[i].LunchOutlet = null; //Outlet2;
                 }
             }
             _mtiGraduationPartyEntities.SaveChanges();
@@ -112,13 +113,13 @@ namespace MTIGraduationProject.Controllers
         /// <summary>
         /// Used to Fill in Tables Ids
         /// </summary>
-        private void PopulateTablesIds()
+        private void ClearingTablesIds()
         {
             var students = _mtiGraduationPartyEntities.Students.ToList();
             int tableId = 1, counter = 0;
             foreach (var student in students)
             {
-                student.TableId = tableId;
+                student.TableId = null; //tableId;
                 counter++;
                 if (counter == 2)
                 {
@@ -130,6 +131,21 @@ namespace MTIGraduationProject.Controllers
             _mtiGraduationPartyEntities.SaveChanges();
         }
 
+        /// <summary>
+        /// Used to Fill in Tables Ids
+        /// </summary>
+        private void ClearingAttendedAndPresenceTime()
+        {
+            var invitations = _mtiGraduationPartyEntities.Invitations.ToList();
+            
+            foreach (var invitation in invitations)
+            {
+                invitation.Attended = false;
+                invitation.PresenceDateTime = null;
+            }
+
+            _mtiGraduationPartyEntities.SaveChanges();
+        }
         public ActionResult GetBusNumber()
         {
             return PartialView("Partial Views/_BusCounter");
