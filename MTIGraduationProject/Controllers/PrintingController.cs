@@ -54,6 +54,11 @@ namespace MTIGraduationProject.Controllers
 
             _mtiGraduationPartyEntities.SaveChanges();
 
+            if (student.BusId == null)
+            {
+                message = "fail";
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
             return Json(message, JsonRequestBehavior.AllowGet);
         }
 

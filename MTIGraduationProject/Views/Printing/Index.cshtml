@@ -11,8 +11,8 @@
     @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
     <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" onclick="select()" />
 
-    
-    @Html.Label("رقم بطاقة المدعو", new { @for = "SearchAttendeeSSN", id="SearchAttendeeSSNLabel" })
+
+    @Html.Label("رقم بطاقة المدعو", new { @for = "SearchAttendeeSSN", id = "SearchAttendeeSSNLabel" })
 
     <input type="number" value="" id="SearchAttendeeSSN" autofocus class="form-control" onclick="select()" />
 
@@ -24,6 +24,11 @@
     <div class="alert alert-warning alert-dismissible hidden" id="RegisteredAlready">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>تحذير!</strong> تم تسجيل حضور هذه الدعوات بالفعل
+    </div>
+
+    <div class="alert alert-danger alert-dismissible hidden" id="RegistrationFail">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>فشل!</strong> لم يتم تسجيل الحضور
     </div>
 
     <div class="alert alert-success alert-dismissible hidden" id="DeleteSuccess">
@@ -154,10 +159,15 @@
                         setTimeout(function() {
                             $("#RegistrationSuccess").addClass("hidden");
                         },1000);
-                    } else {
+                    } else if(message === "attendee Exist"){
                         $("#RegisteredAlready").removeClass("hidden");
                         setTimeout(function() {
                             $("#RegisteredAlready").addClass("hidden");
+                        },1000);
+                    } else {
+                        $("#RegistrationFail").removeClass("hidden");
+                        setTimeout(function() {
+                            $("#RegistrationFail").addClass("hidden");
                         },1000);
                     }
 
