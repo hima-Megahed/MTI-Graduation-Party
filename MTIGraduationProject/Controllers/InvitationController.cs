@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Antlr.Runtime.Misc;
 using Microsoft.Ajax.Utilities;
@@ -205,13 +206,43 @@ namespace MTIGraduationProject.Controllers
                 TempData.Remove("RegisteredSuccessfully");
             }
 
-
             var invitationViewModel = new InvitationViewModel()
             {
                 Id = 0
             };
 
-            return View("",invitationViewModel);
+            return View(invitationViewModel);
+        }
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ExtraInvitationsRegistration(InvitationViewModel invitationViewModel)
+        {
+            if(!ModelState.IsValid)
+            {
+                ViewBag.RegisteredSuccessfully = false;
+                return View(invitationViewModel);
+            }
+
+
+            var invitation = new ExtraInvitation
+            {
+                StudentId = invitationViewModel.StudentId,
+                Name = invitationViewModel.Name,
+                Address = invitationViewModel.Address,
+                NationalId = invitationViewModel.NationalId,
+                BirthDate = invitationViewModel.BirthDate,
+                Relationship = invitationViewModel.Relationship,
+                PresenceDateTime = DateTime.Now
+            };
+
+            _mtiGraduationPartyEntities.ExtraInvitations.Add(invitation);
+            _mtiGraduationPartyEntities.SaveChanges();
+
+            TempData["RegisteredSuccessfully"] = true;
+
+            return RedirectToAction("ExtraInvitationsRegistration");
         }
 
     }

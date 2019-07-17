@@ -38,13 +38,14 @@ namespace MTIGraduationProject.ViewModels
         {
             get
             {
-                Expression<Func<InvitationController, ActionResult>> edit =
+                Expression<Func<InvitationController, ActionResult>> editInvitation =
                     (c => c.EditInvitation(this));
-                Expression<Func<InvitationController, ActionResult>> create =
+
+                Expression<Func<InvitationController, ActionResult>> createInvitation =
                     (c => c.RegisterInvitation(this));
 
-                var action = (Id != 0) ? edit : create;
-
+                var action = Id != 0 ? editInvitation: createInvitation;
+                
                 return (action.Body as MethodCallExpression)?.Method.Name;
             }
         }
