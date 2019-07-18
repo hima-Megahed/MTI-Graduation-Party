@@ -135,14 +135,20 @@
         });
 
         // Printing Content
-        function printInv() {
-            window.print();
-            $("#invitationList").empty();
+    function printInv() {
+        $('#invitationList').load(url,
+            { studentId: $("#SearchStudentId").val() },
+            function() {
+                window.print();
+                $("#invitationList").empty();
 
-            $("#SearchStudentId").val("");
-            $("#SearchAttendeeSSN").val("");
+                $("#SearchStudentId").val("");
+                $("#SearchAttendeeSSN").val("");
 
-            $("#SearchStudentId").focus();
+                $("#SearchStudentId").focus();
+            });
+
+            
         }
 
         // Registering Attendance
