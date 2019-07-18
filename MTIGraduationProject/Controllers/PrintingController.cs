@@ -107,6 +107,8 @@ namespace MTIGraduationProject.Controllers
 
         public ActionResult PrintAttendeesWithBuses()
         {
+            ClearingAttendedAndPresenceTime();
+            ClearingTablesAndBusesIds();
             var attendeesBusReportResults = _mtiGraduationPartyEntities.AttendeesBusReport().AsEnumerable();
             return PartialView("Partial Views/_BusesReport", attendeesBusReportResults);
 
