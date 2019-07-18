@@ -31,7 +31,7 @@ namespace MTIGraduationProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterAttendance(int studentId)
+        public ActionResult RegisterTwoAttendeesOnce(int studentId)
         {
             var message = "success";
             var invitations = _mtiGraduationPartyEntities.Invitations.Where(i => i.StudentId == studentId && i.Approved);
@@ -178,6 +178,25 @@ namespace MTIGraduationProject.Controllers
         public ActionResult GetBusAndTableNumbers()
         {
             return PartialView("Partial Views/_BusAndTableCounter");
+        }
+
+        public ActionResult RegisterIndividualAttendee(int invitationId)
+        {
+            var message = "success";
+            var invitation = _mtiGraduationPartyEntities.Invitations.First(i => i.Id == invitationId);
+
+            if (invitation.Attended == true)
+            {
+                message = "attendee Exist";
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+
+            invitation.Attended = true;
+            invitation.PresenceDateTime = DateTime.Now;
+
+            _mtiGraduationPartyEntities.SaveChanges();
+
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
     }
 }

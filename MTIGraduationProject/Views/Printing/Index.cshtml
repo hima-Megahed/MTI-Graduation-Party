@@ -135,7 +135,7 @@
         });
 
         // Printing Content
-    function printInv() {
+        function printInv() {
         $('#invitationList').load(url,
             { studentId: $("#SearchStudentId").val() },
             function() {
@@ -151,11 +151,11 @@
             
         }
 
-        // Registering Attendance
-        function registerAttendee(studentId) {
+        // Registering two Attendees once
+        function RegisterTwoAttendeesOnce(studentId) {
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("RegisterAttendance","Printing")',
+                url: '@Url.Action("RegisterTwoAttendeesOnce","Printing")',
                 data: { studentId: studentId },
                 success: function (message) {
                     if (message === "success") {
@@ -180,7 +180,9 @@
                 }
 
             });
-        }
+    }
+
+        
 
         // Deleting Invitation
         function deleteInvitation(invitationId) {

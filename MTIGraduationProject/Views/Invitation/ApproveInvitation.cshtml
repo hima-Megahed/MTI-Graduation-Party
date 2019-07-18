@@ -11,7 +11,16 @@
         @Html.Label("رقم الطالب", new { @for = "SearchStudentID" })
 
         <input type="number" value="@(Model != 0 ? Model.ToString() : null)" id="SearchStudentId" autofocus class="form-control" onclick="select()" />
+        
+        <div class="alert alert-success alert-dismissible hidden" id="RegistrationSuccess">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>نجاح!</strong> تم تسجيل الحضور بنجاح.
+        </div>
 
+        <div class="alert alert-warning alert-dismissible hidden" id="RegisteredAlready">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>تحذير!</strong> تم تسجيل حضور هذه الدعوات بالفعل
+        </div>
 
         <div class="alert alert-success alert-dismissible hidden" id="ApprovingSuccess">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -88,6 +97,29 @@
             }
         });
 
+        //Registering individual Attendee once
+        function RegisterIndividualAttendee(invitationId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RegisterIndividualAttendee","Printing")',
+                data: { invitationId: invitationId },
+                success: function (message) {
+                    if (message === "success") {
+                        $("#RegistrationSuccess").removeClass("hidden");
+                        setTimeout(function() {
+                            $("#RegistrationSuccess").addClass("hidden");
+                        },1000);
+                    } else {
+                        $("#RegisteredAlready").removeClass("hidden");
+                        setTimeout(function() {
+                            $("#RegisteredAlready").addClass("hidden");
+                        },1000);
+                    }
+
+                }
+
+            });
+    }
 
         // Approving Attendee
         function ApproveAttendee(invitationId) {

@@ -94,7 +94,7 @@
                                 if (counter == 2)
                                 {
                                     <td id="TableDataRegisterInvitation" rowspan="2">
-                                        <a onclick="registerAttendee(@invitation.StudentId);return false;" href=""> تسجيل حضور</a>
+                                        <a onclick="RegisterTwoAttendeesOnce(@invitation.StudentId);return false;" href=""> تسجيل حضور</a>
                                     </td>
                                 }
                                 
@@ -106,6 +106,7 @@
                                 <td>
                                     <a onclick="ApproveAttendee(@invitation.Id);return false;" href="">تصديق</a> <span> | </span>
                                     <a onclick="RefuseAttendee(@invitation.Id);return false;" href="">إلغاء التصديق</a> <span>|</span>
+                                    <a onclick="RegisterIndividualAttendee(@invitation.Id);return false;" href="">تسجيل حضور</a> <span>|</span>
                                     <a href="@Url.Action("EditInvitation", "Invitation", new {id = invitation.Id})">تعديل</a> <span>|</span>
                                     <a onclick="deleteInvitation(@invitation.Id);return false;" href="">مسح</a>
                                 </td>
