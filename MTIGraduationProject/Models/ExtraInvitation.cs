@@ -12,12 +12,16 @@ namespace MTIGraduationProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SystemTest
+    public partial class ExtraInvitation
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public Nullable<int> StudentId { get; set; }
-        public string StudentName { get; set; }
-        public Nullable<bool> StudentStatus { get; set; }
+        public string Name { get; set; }
+        public string Relationship { get; set; }
+        public string NationalId { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public string Address { get; set; }
+        public Nullable<System.DateTime> PresenceDateTime { get; set; }
     
         public virtual Student Student { get; set; }
     }

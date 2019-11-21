@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MTI_GraduationPartyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ExtraInvitations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Relationship" Type="nvarchar" MaxLength="50" />
+          <Property Name="NationalId" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PresenceDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Invitation">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,6 +32,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="Attended" Type="bit" />
           <Property Name="PresenceDateTime" Type="datetime" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -30,15 +44,6 @@
           <Property Name="BusId" Type="int" />
           <Property Name="BreakfastOutlet" Type="int" />
           <Property Name="LunchOutlet" Type="int" />
-        </EntityType>
-        <EntityType Name="SystemTest">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StudentId" Type="int" />
-          <Property Name="StudentName" Type="nvarchar" MaxLength="200" />
-          <Property Name="StudentStatus" Type="bit" />
         </EntityType>
         <Association Name="FK_Invitation_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
@@ -54,34 +59,62 @@
         </Association>
         <Association Name="FK_SystemTest_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="SystemTest" Type="Self.SystemTest" Multiplicity="*" />
+          <End Role="ExtraInvitations" Type="Self.ExtraInvitations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SystemTest">
+            <Dependent Role="ExtraInvitations">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Function Name="AttendeesBusReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MTI_GraduationPartyModelStoreContainer">
+          <EntitySet Name="ExtraInvitations" EntityType="Self.ExtraInvitations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invitation" EntityType="Self.Invitation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SystemTest" EntityType="Self.SystemTest" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Invitation_Student" Association="Self.FK_Invitation_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Invitation" EntitySet="Invitation" />
           </AssociationSet>
           <AssociationSet Name="FK_SystemTest_Student" Association="Self.FK_SystemTest_Student">
             <End Role="Student" EntitySet="Student" />
-            <End Role="SystemTest" EntitySet="SystemTest" />
+            <End Role="ExtraInvitations" EntitySet="ExtraInvitations" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MTI_GraduationPartyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MTI_Graduation_PartyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ExtraInvitations" EntityType="MTI_GraduationPartyModel.ExtraInvitation" />
+          <EntitySet Name="Invitations" EntityType="MTI_GraduationPartyModel.Invitation" />
+          <EntitySet Name="Students" EntityType="MTI_GraduationPartyModel.Student" />
+          <AssociationSet Name="FK_SystemTest_Student" Association="MTI_GraduationPartyModel.FK_SystemTest_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="ExtraInvitation" EntitySet="ExtraInvitations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invitation_Student" Association="MTI_GraduationPartyModel.FK_Invitation_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Invitation" EntitySet="Invitations" />
+          </AssociationSet>
+          <FunctionImport Name="AttendeesBusReport" ReturnType="Collection(MTI_GraduationPartyModel.AttendeesBusReport_Result)" />
+        </EntityContainer>
+        <EntityType Name="ExtraInvitation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NationalId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PresenceDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Student" Relationship="MTI_GraduationPartyModel.FK_SystemTest_Student" FromRole="ExtraInvitation" ToRole="Student" />
+        </EntityType>
         <EntityType Name="Invitation">
           <Key>
             <PropertyRef Name="Id" />
@@ -96,7 +129,8 @@
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Attended" Type="Boolean" />
           <Property Name="PresenceDateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Invitation_Student" FromRole="Invitation" ToRole="Student" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="MTI_GraduationPartyModel.FK_Invitation_Student" FromRole="Invitation" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -108,22 +142,24 @@
           <Property Name="BusId" Type="Int32" />
           <Property Name="BreakfastOutlet" Type="Int32" />
           <Property Name="LunchOutlet" Type="Int32" />
-          <NavigationProperty Name="Invitations" Relationship="Self.FK_Invitation_Student" FromRole="Student" ToRole="Invitation" />
-          <NavigationProperty Name="SystemTests" Relationship="Self.FK_SystemTest_Student" FromRole="Student" ToRole="SystemTest" />
+          <NavigationProperty Name="ExtraInvitations" Relationship="MTI_GraduationPartyModel.FK_SystemTest_Student" FromRole="Student" ToRole="ExtraInvitation" />
+          <NavigationProperty Name="Invitations" Relationship="MTI_GraduationPartyModel.FK_Invitation_Student" FromRole="Student" ToRole="Invitation" />
         </EntityType>
-        <EntityType Name="SystemTest">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentId" Type="Int32" />
-          <Property Name="StudentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StudentStatus" Type="Boolean" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_SystemTest_Student" FromRole="SystemTest" ToRole="Student" />
-        </EntityType>
+        <Association Name="FK_SystemTest_Student">
+          <End Type="MTI_GraduationPartyModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="MTI_GraduationPartyModel.ExtraInvitation" Role="ExtraInvitation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExtraInvitation">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invitation_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="Invitation" Type="Self.Invitation" Multiplicity="*" />
+          <End Type="MTI_GraduationPartyModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="MTI_GraduationPartyModel.Invitation" Role="Invitation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
@@ -133,32 +169,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SystemTest_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="SystemTest" Type="Self.SystemTest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SystemTest">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="MTI_Graduation_PartyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Invitations" EntityType="Self.Invitation" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="SystemTests" EntityType="Self.SystemTest" />
-          <AssociationSet Name="FK_Invitation_Student" Association="Self.FK_Invitation_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Invitation" EntitySet="Invitations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SystemTest_Student" Association="Self.FK_SystemTest_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="SystemTest" EntitySet="SystemTests" />
-          </AssociationSet>
-          <FunctionImport Name="AttendeesBusReport" ReturnType="Collection(MTI_GraduationPartyModel.AttendeesBusReport_Result)" />
-        </EntityContainer>
         <ComplexType Name="AttendeesBusReport_Result">
           <Property Type="Int32" Name="StudentId" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
@@ -172,41 +182,46 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MTI_GraduationPartyModelStoreContainer" CdmEntityContainer="MTI_Graduation_PartyEntities">
+          <EntitySetMapping Name="ExtraInvitations">
+            <EntityTypeMapping TypeName="MTI_GraduationPartyModel.ExtraInvitation">
+              <MappingFragment StoreEntitySet="ExtraInvitations">
+                <ScalarProperty Name="PresenceDateTime" ColumnName="PresenceDateTime" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Invitations">
             <EntityTypeMapping TypeName="MTI_GraduationPartyModel.Invitation">
               <MappingFragment StoreEntitySet="Invitation">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Attended" ColumnName="Attended" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="PresenceDateTime" ColumnName="PresenceDateTime" />
+                <ScalarProperty Name="Attended" ColumnName="Attended" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="MTI_GraduationPartyModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
-                <ScalarProperty Name="BusId" ColumnName="BusId" />
-                <ScalarProperty Name="BreakfastOutlet" ColumnName="BreakfastOutlet" />
                 <ScalarProperty Name="LunchOutlet" ColumnName="LunchOutlet" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SystemTests">
-            <EntityTypeMapping TypeName="MTI_GraduationPartyModel.SystemTest">
-              <MappingFragment StoreEntitySet="SystemTest">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
-                <ScalarProperty Name="StudentStatus" ColumnName="StudentStatus" />
+                <ScalarProperty Name="BreakfastOutlet" ColumnName="BreakfastOutlet" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
