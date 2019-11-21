@@ -229,7 +229,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Student\RegisterStudent.cshtml" />
     <Content Include="Views\Invitation\RegisterInvitation.cshtml" />
@@ -238,6 +237,7 @@
     <Content Include="Views\Shared\Partial Views\_SystemTestPrintStudents.cshtml" />
     <Content Include="Views\Shared\Partial Views\_BusesReport.cshtml" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
+    <Content Include="Views\Invitation\RegisterExtraInvitation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

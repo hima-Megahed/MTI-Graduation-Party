@@ -150,6 +150,50 @@ namespace MTIGraduationProject.Controllers
 
             return Json(new { message = "success", studentId = studentId.ToString() }, JsonRequestBehavior.AllowGet);
         }
-        
+
+        [HttpGet]
+        public ActionResult RegisterExtraInvitation()
+        {
+            ViewBag.RegisteredSuccessfully = false;
+
+            if (TempData.ContainsKey("RegisteredSuccessfully"))
+            {
+                ViewBag.RegisteredSuccessfully = true;
+                TempData.Remove("RegisteredSuccessfully");
+            }
+
+            return View();
+        }
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult RegisterExtraInvitation(ExtraInvitation extraInvitation)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.RegisteredSuccessfully = false;
+                return View();
+            }
+
+
+            var invitation = new ExtraInvitation
+            {
+                StudentId = extraInvitation.StudentId,
+                Name = extraInvitation.Name,
+                Address = extraInvitation.Address,
+                NationalId = extraInvitation.NationalId,
+                BirthDate = extraInvitation.BirthDate,
+                Relationship = extraInvitation.Relationship,
+                PresenceDateTime = DateTime.Now
+            };
+
+            _mtiGraduationPartyEntities.ExtraInvitations.Add(extraInvitation);
+            _mtiGraduationPartyEntities.SaveChanges();
+
+            TempData["RegisteredSuccessfully"] = true;
+
+            return RedirectToAction("RegisterExtraInvitation");
+        }
     }
 }
